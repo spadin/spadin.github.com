@@ -1,0 +1,73 @@
+/* M O D U L E */
+
+/* 5. GLOBAL LAYOUT & GLOBAL CUSTOM TYPOGRAPHY
+----------------------------------------------------------------------------------------*/
+
+/* 6. CUSTOM LAYOUT & TYPOGRAPHY (Baby bear)
+----------------------------------------------------------------------------------------*/
+
+
+.m-site-title {
+  color: #32A5F5;
+
+  font-family: 'Old Standard TT';
+  font-size: 1.777em;
+  font-style: normal;
+  font-weight: 200;
+  text-decoration: none;
+
+  margin-top: 2em;
+}
+
+.m-site-title a {
+  color: #32A5F5;
+  text-decoration: none;
+}
+
+.m-site-title a:hover {
+  color: #32A5F5;
+}
+
+.m-post-date {
+  margin: 4em 0 0 0;
+}
+
+.m-post-title {
+  display: block;
+  margin: 0.5em 0 1em 0;
+}
+
+.m-post-subtitle {
+  margin: 0 0 1em 0;
+  max-width: 700px;
+}
+
+.dark img {
+  border: 2px solid #DDD;
+}
+
+footer h3 {
+  font-family: sans-serif;
+  color: #EEE;
+}
+
+.column {
+  text-align: left;
+
+  float: left;
+  padding: 0 2em 2em 2em;
+  width: 13.333333333em;
+}
+
+.column img {
+  margin: 0.5em 1em 0 0;
+  height: 30px;
+}
+
+code {
+  background-color: #ececec;
+  font-family: "Monaco", mono;
+  font-size: 0.7em;
+  padding: 2px 5px;
+  border-radius: 5px;
+}

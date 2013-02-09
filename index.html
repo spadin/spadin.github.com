@@ -1,0 +1,15 @@
+---
+layout: frontpage
+---
+
+<section class="blogpost-list">
+  <h1>Recent Blog Posts</h1>
+  <ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    <p>{{ post.snippet }}</p>
+  {% endfor %}
+  </ul>
+</section>
