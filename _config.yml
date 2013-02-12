@@ -1,0 +1,3 @@
+markdown: kramdown
+kramdown:
+  use_coderay: true

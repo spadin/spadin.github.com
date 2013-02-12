@@ -1,0 +1,12 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    coderay (1.0.8)
+    kramdown (0.14.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  coderay
+  kramdown
