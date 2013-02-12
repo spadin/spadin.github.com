@@ -71,3 +71,5 @@ code {
   padding: 2px 5px;
   border-radius: 5px;
 }
+pre code {
+  background-color: transparent;

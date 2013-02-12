@@ -39,8 +39,7 @@ This is the non-functioning Minimax algorithm for posterity.
     (defn min-move [mark board]
       (let [moves
            (for [position (board/get-empty-indices board) 
-                 :let [new-board (board/set-mark-at-index mark position
-board)]]
+                 :let [new-board (board/set-mark-at-index mark position board)]]
              (if (rules/gameover? new-board) 
                {:score (calculate-score mark new-board)
                 :position position}
@@ -51,8 +50,7 @@ board)]]
     (defn max-move [mark board]
       (let [moves
            (for [position (board/get-empty-indices board)
-                 :let [new-board (board/set-mark-at-index mark position
-board)]]
+                 :let [new-board (board/set-mark-at-index mark position board)]]
              (if (rules/gameover? new-board)
                {:score (calculate-score mark new-board)
                 :position position}
