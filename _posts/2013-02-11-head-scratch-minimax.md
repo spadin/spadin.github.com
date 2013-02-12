@@ -35,6 +35,7 @@ finish the minimax algorithm.
 
 This is the non-functioning Minimax algorithm for posterity.
 
+{% highlight clojure %}
     (defn min-move [mark board]
       (let [moves
            (for [position (board/get-empty-indices board) 
@@ -58,4 +59,4 @@ board)]]
                (min-move (rules/next-player mark) new-board)))]
         (do
           (reduce max-key :score (reverse moves)))))
-{:lang="clojure"}
+{% endhighlight %}
