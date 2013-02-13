@@ -36,25 +36,25 @@ finish the minimax algorithm.
 This is the non-functioning Minimax algorithm for posterity.
 
 {% highlight clojure %}
-    (defn min-move [mark board]
-      (let [moves
-           (for [position (board/get-empty-indices board) 
-                 :let [new-board (board/set-mark-at-index mark position board)]]
-             (if (rules/gameover? new-board) 
-               {:score (calculate-score mark new-board)
-                :position position}
-               (max-move (rules/next-player mark) new-board)))]
-        (do
-          (reduce min-key :score (reverse moves)))))
+(defn min-move [mark board]
+  (let [moves
+       (for [position (board/get-empty-indices board) 
+             :let [new-board (board/set-mark-at-index mark position board)]]
+         (if (rules/gameover? new-board) 
+           {:score (calculate-score mark new-board)
+            :position position}
+           (max-move (rules/next-player mark) new-board)))]
+    (do
+      (reduce min-key :score (reverse moves)))))
 
-    (defn max-move [mark board]
-      (let [moves
-           (for [position (board/get-empty-indices board)
-                 :let [new-board (board/set-mark-at-index mark position board)]]
-             (if (rules/gameover? new-board)
-               {:score (calculate-score mark new-board)
-                :position position}
-               (min-move (rules/next-player mark) new-board)))]
-        (do
-          (reduce max-key :score (reverse moves)))))
+(defn max-move [mark board]
+  (let [moves
+       (for [position (board/get-empty-indices board)
+             :let [new-board (board/set-mark-at-index mark position board)]]
+         (if (rules/gameover? new-board)
+           {:score (calculate-score mark new-board)
+            :position position}
+           (min-move (rules/next-player mark) new-board)))]
+    (do
+      (reduce max-key :score (reverse moves)))))
 {% endhighlight %}
