@@ -131,4 +131,9 @@ a:active, a:focus { outline: none; }
 
 
 
-
+small {
+  color: #6f6f6f;
+}
+.post-title {
+  font-size: 1.2em;
+}
