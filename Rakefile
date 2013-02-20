@@ -11,4 +11,9 @@ task :post do
   post.create!
 end
 
+desc "Launch preview environment"
+task :preview do
+    system "jekyll --auto --server --pygments"
+end
+
 task :default => :spec
