@@ -26,3 +26,5 @@ could have hoped for the first run.
 
 Now I think the 3x3x3 Tic Tac Toe game should be very easy to implement
 as well. I'll be doing that next week.
+
+_Sidenote: It's my mom's 71st Birthday today. :tada:_
