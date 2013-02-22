@@ -16,4 +16,13 @@ task :preview do
     system "jekyll --auto --server --pygments"
 end
 
+desc "Update master branch"
+task :update do
+  dir = File.dirname(__FILE__)
+  system "cd #{dir}"
+  system "git checkout source _site/"
+  system "mv _site/* ./"
+  system "rm -r _site"
+end
+
 task :default => :spec
