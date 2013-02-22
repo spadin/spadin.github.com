@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Week One at 8th Light // Sandro Padin</title>
+<meta name="description" content="A blog by a resident apprentice at 8th Light">
+<meta name="author" content="Sandro Padin">
+
+<!-- /ht Andy Clarke - http://front.ie/lkCwyf -->
+<meta http-equiv="cleartype" content="on">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<link href='http://fonts.googleapis.com/css?family=Old+Standard+TT'
+rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="/link/to/favicon.ico">
+<link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="/stylesheets/base.css" media="all">
+<link rel="stylesheet" href="/stylesheets/module.css" media="all">
+<link rel="stylesheet" href="/stylesheets/state.css" media="all">
+<link rel="stylesheet" href="/stylesheets/github.css" media="all">
+
+<!-- /ht Jeremy Keith - http://front.ie/mLXiaS -->
+<link rel="stylesheet" href="/stylesheets/layout.css" media="all and (min-width: 33.236em)">
+<link rel="alternate" type="application/atom+xml" title="Subscribe to Sandro Padin's blog." href="/atom.xml"/>
+<!-- 30em + (1.618em * 2) = 33.236em / Eliminates potential of horizontal scrolling in most cases -->
+
+<script src="/js/libs/modernizr-1.7.min.js"></script>
+<!--<script type="text/javascript" src="http://use.typekit.com/yks8igg.js"></script>-->
+<!--<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h2 class="m-site-title">
+        <a href="/index.html">Sandro Padin</a>
+      </h2>
+      <section>
+        <p class="m-post-date">
+          February 8, 2012
+        </p>
+        <h1 class="m-post-title">
+          Week One at 8th Light
+        </h1> 
+        <h2 class="m-post-subtitle">
+          One fun week learning Clojure and putting what I learned into use by making a Tic Tac Toe game
+        </h2>
+      </section>
+    </div>
+  </header>
+  
+  <div id="summary">
+    <div class="container cf">
+      <article>
+        <p>It’s been a great first week at 8th Light as a Resident Apprentice. I
+started the week by performing the <a href="http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata">bowling game kata</a> in Java for <a href="http://www.8thlight.com/our-team/micah-martin">Micah</a> with
+Rick, a fellow apprentice. I enjoyed practicing the kata last weekend,
+but it still took me 15 minutes to perform which was 5 minutes shy of
+my 10 minute goal. I realized if I want to get my time down I don’t just need to
+type faster, but really get familiar with IntelliJ IDEA to take advantage of all
+the keyboard shortcuts it offers. I hadn’t programmed in Java in quite a few
+years, and I was happily surprised to find a new feature (to me)
+called annotations. From Wikipedia, “An annotation, in the Java
+computer programming language, is a form of syntactic metadata that
+can be added to Java source code.” In short, annotations let you add
+information about the source code. I noticed annoations while using JUnit,
+the tests are marked with an <code>@Test</code> annotation.</p>
+
+<p>I’ve spent the majority of this week learning Clojure and making a 
+command-line Tic Tac Toe game. The process has been rewarding and 
+frustrating at the same time. I call the project <a href="https://github.com/spadin/ticlj">Ticlj</a>, although 
+I’m planning to change the name to <a href="https://github.com/spadin/ticlj">TicljTacToe</a> soon. I wrote the 
+basic human vs human game in a few days, but after talking to Micah, I 
+learned the way I coded my program had imperative programming qualities rather 
+than being purely functional; I kept a reference to the Tic Tac Toe board and 
+I was changing the reference to point at other iterations of the board via <code>ref</code> 
+and <code>ref-set</code> calls.</p>
+
+<p>I took some time today to refactor my game into being purely
+functional. In order to do so, I had to change about 15 or so
+functions to accept a new <code>board</code> argument. By doing so, the reference
+to the board was no longer necessary, so now my Tic Tac Toe game has no
+mutable state.</p>
+
+<p>I’m very happy with what I’ve been able to accomplish this week.
+Clojure has actually been a nice language to work with, aside from the
+initial shock over the incredible number of parenthesis, the language
+is simple and succint.</p>
+
+<p>Thanks to Micah, Rick, Ryan and Rylan for helping me wrap my head
+around functional programming principles. After a long time of not thinking
+about it, the principles of functional programming were a little
+confusing, but I think I have a good grasp on it.</p>
+
+<p>On a separate note, I noticed some interesting books on design
+patterns and TDD in the 8th Light library and I plan to take a closer 
+look next week.</p>
+
+<h3 id="things-to-accomplish-next-week">Things to accomplish next week:</h3>
+
+<ol>
+  <li>Complete the AI for my <a href="https://github.com/spadin/ticlj">Tic Tac Toe game.</a></li>
+  <li>Finish the full <a href="https://github.com/spadin/ticlj">Tic Tac Toe game.</a></li>
+  <li>Read a book from the 8th Light library.</li>
+</ol>
+
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="clearfix">
+    <div class="container">
+      <div class="column">
+        <h3>Find Me</h3>
+        <a href="http://twitter.com/sandropadin"><img alt="twitter" src="/images/twitter.png"></a>
+        <a href="http://sa.ndropad.in/atom.xml"><img alt="rss" src="/images/rss.png"></a>
+      </div>
+
+      <div class="column">
+        <h3>About Me</h3>
+        <p>
+          Resident apprentice at<br>
+          <a href="http://www.8thlight.com">8th Light, Inc</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
