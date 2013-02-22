@@ -1,4 +1,0 @@
-markdown: kramdown
-kramdown:
-  use_coderay: true
-emoji: ./images/emoji
