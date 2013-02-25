@@ -4,9 +4,75 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-02-22T09:15:54-06:00</updated>
+ <updated>2013-02-24T22:38:44-06:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>SOLID</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/24/solid.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>24 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/24/solid</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;This post will be edited as I learn more about SOLID. For
+information from more authoritative sources check the
+&lt;a href=&quot;#references&quot;&gt;references&lt;/a&gt; below.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;single-responsibility-principle&quot;&gt;Single Responsibility Principle&lt;/h3&gt;
+
+&lt;p&gt;Every class should have a single responsibility. A responsibility is
+defined as a reason to change.&lt;/p&gt;
+
+&lt;h3 id=&quot;openclosed-principle&quot;&gt;Open/closed Principle&lt;/h3&gt;
+
+&lt;p&gt;You should be able to extend a class’ behavior without modifying the
+class.&lt;/p&gt;
+
+&lt;h3 id=&quot;liskov-substitution-principle&quot;&gt;Liskov Substitution Principle&lt;/h3&gt;
+
+&lt;p&gt;Derived classes should be substitutable for their base classes.&lt;/p&gt;
+
+&lt;h3 id=&quot;interface-segregation-principle&quot;&gt;Interface Segregation Principle&lt;/h3&gt;
+
+&lt;p&gt;Make fine grained classes that are client specific.&lt;/p&gt;
+
+&lt;h3 id=&quot;dependency-inversion-principle&quot;&gt;Dependency Inversion Principle&lt;/h3&gt;
+
+&lt;p&gt;Depend on abstractions, not concretions.&lt;/p&gt;
+
+&lt;h4 id=&quot;references&quot;&gt;References:&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod&quot;&gt;The Principles of OOD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)&quot;&gt;SOLID (object-oriented design)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Installing Ruby 2.0.0-p0</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/24/installing-ruby-2-0-0-p0.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>24 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/24/installing-ruby-2-0-0-p0</id>
+   <content type="html">&lt;p&gt;I kept receiving a complilation error while installing Ruby 2.0.0-p0 today. &lt;/p&gt;
+
+&lt;p&gt;I use rbenv/ruby-build and had to use this snippet for installation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ CC=cc rbenv install 2.0.0-p0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;
+I hope this helps anyone experiencing trouble installing Ruby 2.0.0&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Four-by-four Tic Tac Toe</title>
@@ -302,70 +368,6 @@ finish the minimax algorithm. &lt;/p&gt;
     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;do&lt;/span&gt;
       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce max-key &lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reverse &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>Week One at 8th Light</title>
-   <category term="" />
-   <link href="http://sa.ndropad.in/2013/02/08/week-one-at-8th-light.html"/>
-   <author>
-     <name>[]</name>
-   </author>
-   <updated>08 Feb 2013</updated>
-   <id>http://sa.ndropad.in/2013/02/08/week-one-at-8th-light</id>
-   <content type="html">&lt;p&gt;It’s been a great first week at 8th Light as a Resident Apprentice. I
-started the week by performing the &lt;a href=&quot;http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata&quot;&gt;bowling game kata&lt;/a&gt; in Java for &lt;a href=&quot;http://www.8thlight.com/our-team/micah-martin&quot;&gt;Micah&lt;/a&gt; with
-Rick, a fellow apprentice. I enjoyed practicing the kata last weekend,
-but it still took me 15 minutes to perform which was 5 minutes shy of
-my 10 minute goal. I realized if I want to get my time down I don’t just need to
-type faster, but really get familiar with IntelliJ IDEA to take advantage of all
-the keyboard shortcuts it offers. I hadn’t programmed in Java in quite a few
-years, and I was happily surprised to find a new feature (to me)
-called annotations. From Wikipedia, “An annotation, in the Java
-computer programming language, is a form of syntactic metadata that
-can be added to Java source code.” In short, annotations let you add
-information about the source code. I noticed annoations while using JUnit,
-the tests are marked with an &lt;code&gt;@Test&lt;/code&gt; annotation.&lt;/p&gt;
-
-&lt;p&gt;I’ve spent the majority of this week learning Clojure and making a 
-command-line Tic Tac Toe game. The process has been rewarding and 
-frustrating at the same time. I call the project &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;Ticlj&lt;/a&gt;, although 
-I’m planning to change the name to &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;TicljTacToe&lt;/a&gt; soon. I wrote the 
-basic human vs human game in a few days, but after talking to Micah, I 
-learned the way I coded my program had imperative programming qualities rather 
-than being purely functional; I kept a reference to the Tic Tac Toe board and 
-I was changing the reference to point at other iterations of the board via &lt;code&gt;ref&lt;/code&gt; 
-and &lt;code&gt;ref-set&lt;/code&gt; calls.&lt;/p&gt;
-
-&lt;p&gt;I took some time today to refactor my game into being purely
-functional. In order to do so, I had to change about 15 or so
-functions to accept a new &lt;code&gt;board&lt;/code&gt; argument. By doing so, the reference
-to the board was no longer necessary, so now my Tic Tac Toe game has no
-mutable state.&lt;/p&gt;
-
-&lt;p&gt;I’m very happy with what I’ve been able to accomplish this week.
-Clojure has actually been a nice language to work with, aside from the
-initial shock over the incredible number of parenthesis, the language
-is simple and succint.&lt;/p&gt;
-
-&lt;p&gt;Thanks to Micah, Rick, Ryan and Rylan for helping me wrap my head
-around functional programming principles. After a long time of not thinking
-about it, the principles of functional programming were a little
-confusing, but I think I have a good grasp on it.&lt;/p&gt;
-
-&lt;p&gt;On a separate note, I noticed some interesting books on design
-patterns and TDD in the 8th Light library and I plan to take a closer 
-look next week.&lt;/p&gt;
-
-&lt;h3 id=&quot;things-to-accomplish-next-week&quot;&gt;Things to accomplish next week:&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Complete the AI for my &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;Tic Tac Toe game.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Finish the full &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;Tic Tac Toe game.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Read a book from the 8th Light library.&lt;/li&gt;
-&lt;/ol&gt;
 
 </content>
  </entry>
