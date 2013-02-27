@@ -4,9 +4,48 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-02-24T22:38:44-06:00</updated>
+ <updated>2013-02-26T21:28:23-06:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>First Day Practicing Joodo</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/26/first-day-practicing-joodo.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>26 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/26/first-day-practicing-joodo</id>
+   <content type="html">&lt;p&gt;I downloaded and started working with Joodo this morning. This is my
+first Clojure web framework. I’ve work with several other web frameworks
+in several languages and I’m familiar with how they work. &lt;/p&gt;
+
+&lt;p&gt;Joodo is as simple to use as any other framework. The setup time was
+minimal and I had the server up and running in less than 30 minutes. The
+only bump I came up against was when I tried deploying my test app on
+Heroku. The included Procfile wasn’t starting up the web worker properly
+and Heroku complained about binding to the wrong port and address. I
+fixed these and was about to submit a bug when I noticed the bug is
+already fixed on the Joodo Github repo but the new jar hasn’t been
+deployed to Clojars. &lt;/p&gt;
+
+&lt;p&gt;Working with Joodo meant working with hiccup templates. When I first saw
+these templates a few weeks ago I found them a bit odd. They reminded me
+of Haml which I don’t use unless necessary. Having worked with Clojure
+these past few weeks, however, has warmed me up to these hiccup
+templates and now I find them very easy to use. I also enjoy not having
+to switch contexts in my brain from HTML to Clojure and vice versa. &lt;/p&gt;
+
+&lt;p&gt;Resources:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.joodoweb.com/&quot;&gt;Joodo Web Framework&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/weavejester/hiccup&quot;&gt;Hiccup Templates&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>SOLID</title>
@@ -25,6 +64,48 @@ information from more authoritative sources check the
 
 &lt;p&gt;Every class should have a single responsibility. A responsibility is
 defined as a reason to change.&lt;/p&gt;
+
+&lt;p&gt;Take the following example (adapted from this &lt;a href=&quot;http://butunclebob.com/ArticleS.UncleBob.SrpInRuby&quot;&gt;SRP in Ruby article&lt;/a&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# employee.rb
+class Employee
+  def set_hours(hours)
+  ...
+  end
+  def calculate_pay
+  ...
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The Employee class is calculating the pay and accepts the number of
+hours an employee works. Those are two separate responsibilities.&lt;/p&gt;
+
+&lt;p&gt;This change would assure each file has only a single responsibility.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# employee_time.rb
+class EmployeeTime
+  def set_hours(hours)
+  ...
+  end
+end
+
+# employee_pay.rb
+class EmployeePay
+  def calculate_pay
+  ...
+  end
+end
+
+# employee.rb
+require 'employee_time'
+require 'employee_pay'
+
+class Employee
+  include EmployeeTime
+  include EmployeePay
+end
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&quot;openclosed-principle&quot;&gt;Open/closed Principle&lt;/h3&gt;
 
@@ -303,71 +384,6 @@ much lately. The talk focused on ways to define macros and arguments
 for and against using macros. Overall it was an interesting talk although a bit 
 complicated at points. I don’t really see myself applying what I learned
 about macros anytime soon, but I enjoyed the talk.&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>Head Scratch Minimax</title>
-   <category term="" />
-   <link href="http://sa.ndropad.in/2013/02/11/head-scratch-minimax.html"/>
-   <author>
-     <name>[]</name>
-   </author>
-   <updated>11 Feb 2013</updated>
-   <id>http://sa.ndropad.in/2013/02/11/head-scratch-minimax</id>
-   <content type="html">&lt;p&gt;I spent all of today trying to implement the minimax algorithm in
-Clojure. I spent the morning looking at my old Ruby implementation and
-determining how to convert it to a functional style.&lt;/p&gt;
-
-&lt;p&gt;I came up with a plan for testing the &lt;code&gt;min-move&lt;/code&gt; and &lt;code&gt;max-move&lt;/code&gt; functions
-and began implementing. Figuring out which tests to write proved to be
-very difficult. &lt;/p&gt;
-
-&lt;p&gt;My unfamiliarity with Clojure caught up with me today. I was testing the
-functions and some aspects where working while others were not, it was
-very frustrating. &lt;/p&gt;
-
-&lt;p&gt;I finally decided to fire up the REPL and run some examples as a sanity
-check which is when I found the bug that had been biting me all day. &lt;/p&gt;
-
-&lt;p&gt;I was calculating the &lt;code&gt;max-move&lt;/code&gt; by first running a &lt;code&gt;for&lt;/code&gt; loop that collects
-all the moves with their score as a list, then tries to reduce that list to only
-hold the item with the highest score. I was doing the opposite for the
-&lt;code&gt;min-move&lt;/code&gt; function. Or so I thought…&lt;/p&gt;
-
-&lt;p&gt;Neither the &lt;code&gt;max-move&lt;/code&gt; nor the &lt;code&gt;min-move&lt;/code&gt; functions were working as I
-expected them. The way in which I was reducing the list of moves and
-scores was incorrect. &lt;/p&gt;
-
-&lt;p&gt;And that is where I left off this evening. Now that I understand what
-isn’t functioning I can go in with a clear head tomorrow morning and
-finish the minimax algorithm. &lt;/p&gt;
-
-&lt;p&gt;This is the non-functioning Minimax algorithm for posterity.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;min-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;
-       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/get-empty-indices&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-             &lt;span class=&quot;ss&quot;&gt;:let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/set-mark-at-index&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]]&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/gameover?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-           &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;calculate-score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;max-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce min-key &lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reverse &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;max-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;
-       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/get-empty-indices&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-             &lt;span class=&quot;ss&quot;&gt;:let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/set-mark-at-index&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]]&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/gameover?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;calculate-score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;min-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce max-key &lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reverse &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </content>
  </entry>
