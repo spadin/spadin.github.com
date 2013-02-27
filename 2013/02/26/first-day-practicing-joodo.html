@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SOLID // Sandro Padin</title>
+<title>First Day Practicing Joodo // Sandro Padin</title>
 <meta name="description" content="A blog by a resident apprentice at 8th Light">
 <meta name="author" content="Sandro Padin">
 
@@ -39,13 +39,13 @@ rel='stylesheet' type='text/css'>
       </h2>
       <section>
         <p class="m-post-date">
-          February 24, 2013
+          February 26, 2013
         </p>
         <h1 class="m-post-title">
-          SOLID
+          First Day Practicing Joodo
         </h1> 
         <h2 class="m-post-subtitle">
-          Five rules for writing more maintainable and extendable code
+          A Few Minor Bumps But Still Chugging Along
         </h2>
       </section>
     </div>
@@ -54,79 +54,31 @@ rel='stylesheet' type='text/css'>
   <div id="summary">
     <div class="container cf">
       <article>
-        <p><em>This post will be edited as I learn more about SOLID. For
-information from more authoritative sources check the
-<a href="#references">references</a> below.</em></p>
+        <p>I downloaded and started working with Joodo this morning. This is my
+first Clojure web framework. I’ve work with several other web frameworks
+in several languages and I’m familiar with how they work. </p>
 
-<h3 id="single-responsibility-principle">Single Responsibility Principle</h3>
+<p>Joodo is as simple to use as any other framework. The setup time was
+minimal and I had the server up and running in less than 30 minutes. The
+only bump I came up against was when I tried deploying my test app on
+Heroku. The included Procfile wasn’t starting up the web worker properly
+and Heroku complained about binding to the wrong port and address. I
+fixed these and was about to submit a bug when I noticed the bug is
+already fixed on the Joodo Github repo but the new jar hasn’t been
+deployed to Clojars. </p>
 
-<p>Every class should have a single responsibility. A responsibility is
-defined as a reason to change.</p>
+<p>Working with Joodo meant working with hiccup templates. When I first saw
+these templates a few weeks ago I found them a bit odd. They reminded me
+of Haml which I don’t use unless necessary. Having worked with Clojure
+these past few weeks, however, has warmed me up to these hiccup
+templates and now I find them very easy to use. I also enjoy not having
+to switch contexts in my brain from HTML to Clojure and vice versa. </p>
 
-<p>Take the following example (adapted from this <a href="http://butunclebob.com/ArticleS.UncleBob.SrpInRuby">SRP in Ruby article</a>):</p>
-
-<pre><code># employee.rb
-class Employee
-  def set_hours(hours)
-  ...
-  end
-  def calculate_pay
-  ...
-  end
-end
-</code></pre>
-
-<p>The Employee class is calculating the pay and accepts the number of
-hours an employee works. Those are two separate responsibilities.</p>
-
-<p>This change would assure each file has only a single responsibility.</p>
-
-<pre><code># employee_time.rb
-class EmployeeTime
-  def set_hours(hours)
-  ...
-  end
-end
-
-# employee_pay.rb
-class EmployeePay
-  def calculate_pay
-  ...
-  end
-end
-
-# employee.rb
-require 'employee_time'
-require 'employee_pay'
-
-class Employee
-  include EmployeeTime
-  include EmployeePay
-end
-</code></pre>
-
-<h3 id="openclosed-principle">Open/closed Principle</h3>
-
-<p>You should be able to extend a class’ behavior without modifying the
-class.</p>
-
-<h3 id="liskov-substitution-principle">Liskov Substitution Principle</h3>
-
-<p>Derived classes should be substitutable for their base classes.</p>
-
-<h3 id="interface-segregation-principle">Interface Segregation Principle</h3>
-
-<p>Make fine grained classes that are client specific.</p>
-
-<h3 id="dependency-inversion-principle">Dependency Inversion Principle</h3>
-
-<p>Depend on abstractions, not concretions.</p>
-
-<h4 id="references">References:</h4>
+<p>Resources:</p>
 
 <ul>
-  <li><a href="http://www.butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod">The Principles of OOD</a></li>
-  <li><a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">SOLID (object-oriented design)</a></li>
+  <li><a href="http://www.joodoweb.com/">Joodo Web Framework</a></li>
+  <li><a href="https://github.com/weavejester/hiccup">Hiccup Templates</a></li>
 </ul>
 
 
