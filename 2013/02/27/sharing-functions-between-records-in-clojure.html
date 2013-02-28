@@ -70,51 +70,51 @@ difference namespaces.</p>
 
 <p>Sample code:</p>
 
-<pre><code>; src/protocol_test/core.clj
-(ns protocol-tests.core)
+<div class="highlight"><pre><code class="clojure">    <span class="c1">; src/protocol_test/core.clj</span>
+    <span class="p">(</span><span class="kd">ns </span><span class="nv">protocol-tests.core</span><span class="p">)</span>
 
-(defprotocol IPrinter
-  (output [this message])
-  (upper-case [this message]))
+    <span class="p">(</span><span class="kd">defprotocol </span><span class="nv">IPrinter</span>
+      <span class="p">(</span><span class="nf">output</span> <span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">])</span>
+      <span class="p">(</span><span class="nf">upper-case</span> <span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">]))</span>
 
-(def PrinterDefaults
-  {:output (fn [this message]
-                (print message))
-   :upper-case (fn [this message]
-                 (clojure.string/upper-case message))})
+    <span class="p">(</span><span class="k">def </span><span class="nv">PrinterDefaults</span>
+      <span class="p">{</span><span class="ss">:output</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">]</span>
+                    <span class="p">(</span><span class="nb">print </span><span class="nv">message</span><span class="p">))</span>
+       <span class="ss">:upper-case</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">]</span>
+                     <span class="p">(</span><span class="nf">clojure.string/upper-case</span> <span class="nv">message</span><span class="p">))})</span>
 
-(defrecord TextPrinter [])
-(defrecord HtmlPrinter [])
+    <span class="p">(</span><span class="kd">defrecord </span><span class="nv">TextPrinter</span> <span class="p">[])</span>
+    <span class="p">(</span><span class="kd">defrecord </span><span class="nv">HtmlPrinter</span> <span class="p">[])</span>
 
-(extend TextPrinter
-  IPrinter
-  (merge PrinterDefaults))
+    <span class="p">(</span><span class="nf">extend</span> <span class="nv">TextPrinter</span>
+      <span class="nv">IPrinter</span>
+      <span class="p">(</span><span class="nb">merge </span><span class="nv">PrinterDefaults</span><span class="p">))</span>
 
-(extend HtmlPrinter
-  IPrinter
-  (merge PrinterDefaults
-         {:output (fn [this message]
-                       (print (str "&lt;p&gt;" (upper-case this message) "&lt;/p&gt;")))}))
-</code></pre>
+    <span class="p">(</span><span class="nf">extend</span> <span class="nv">HtmlPrinter</span>
+      <span class="nv">IPrinter</span>
+      <span class="p">(</span><span class="nb">merge </span><span class="nv">PrinterDefaults</span>
+             <span class="p">{</span><span class="ss">:output</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">]</span>
+                           <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;&lt;p&gt;&quot;</span> <span class="p">(</span><span class="nf">upper-case</span> <span class="nv">this</span> <span class="nv">message</span><span class="p">)</span> <span class="s">&quot;&lt;/p&gt;&quot;</span><span class="p">)))}))</span>
+</code></pre></div>
 
 <p><br />
 And the tests:</p>
 
-<pre><code>; spec/protocol_tests/core_spec.clj
-(ns protocol-tests.core-spec
-  (:use [speclj.core]
-        [protocol-tests.core])
-  (:import [protocol_tests.core TextPrinter HtmlPrinter]))
+<div class="highlight"><pre><code class="clojure">    <span class="c1">; spec/protocol_tests/core_spec.clj</span>
+    <span class="p">(</span><span class="kd">ns </span><span class="nv">protocol-tests.core-spec</span>
+      <span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">speclj.core</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">protocol-tests.core</span><span class="p">])</span>
+      <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">protocol_tests.core</span> <span class="nv">TextPrinter</span> <span class="nv">HtmlPrinter</span><span class="p">]))</span>
 
-(describe "core"
-  (it "returns the default functionality"
-    (should= "sample text"
-             (with-out-str (output (TextPrinter.) "sample text"))))
+    <span class="p">(</span><span class="nf">describe</span> <span class="s">&quot;core&quot;</span>
+      <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;returns the default functionality&quot;</span>
+        <span class="p">(</span><span class="nf">should=</span> <span class="s">&quot;sample text&quot;</span>
+                 <span class="p">(</span><span class="nb">with-out-str </span><span class="p">(</span><span class="nf">output</span> <span class="p">(</span><span class="nf">TextPrinter.</span><span class="p">)</span> <span class="s">&quot;sample text&quot;</span><span class="p">))))</span>
 
-  (it "returns the SAMPLE TEXT surrounded by a p tag"
-    (should= "&lt;p&gt;SAMPLE TEXT&lt;/p&gt;"
-             (with-out-str (output (HtmlPrinter.) "sample text")))))
-</code></pre>
+      <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;returns the SAMPLE TEXT surrounded by a p tag&quot;</span>
+        <span class="p">(</span><span class="nf">should=</span> <span class="s">&quot;&lt;p&gt;SAMPLE TEXT&lt;/p&gt;&quot;</span>
+                 <span class="p">(</span><span class="nb">with-out-str </span><span class="p">(</span><span class="nf">output</span> <span class="p">(</span><span class="nf">HtmlPrinter.</span><span class="p">)</span> <span class="s">&quot;sample text&quot;</span><span class="p">)))))</span>
+</code></pre></div>
 
 <p><br />
 <em>Aside:</em></p>
