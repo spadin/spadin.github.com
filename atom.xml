@@ -4,9 +4,90 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-02-26T21:28:23-06:00</updated>
+ <updated>2013-02-27T22:31:42-06:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Sharing Functions Between Records in Clojure</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/27/sharing-functions-between-records-in-clojure.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>27 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/27/sharing-functions-between-records-in-clojure</id>
+   <content type="html">&lt;p&gt;Today I came across a nice way to share functionality between records
+that extend the same protocol in Clojure. I recently wanted a way to
+encapsulate some functionality into a record via &lt;code&gt;defrecord&lt;/code&gt; but noticed
+some duplication, after a little digging around I found some nice tips
+for doing this. Unfortunately, I can’t find those links in my history. I
+have the next best thing though, some test code examples.&lt;/p&gt;
+
+&lt;p&gt;Notice in the example below that both &lt;code&gt;TextPrinter&lt;/code&gt; and &lt;code&gt;HtmlPrinter&lt;/code&gt;
+have access to the &lt;code&gt;ouput&lt;/code&gt; function and &lt;code&gt;upper-case&lt;/code&gt; function.
+&lt;code&gt;HtmlPrinter&lt;/code&gt; overrides the default &lt;code&gt;output&lt;/code&gt; function while
+&lt;code&gt;TextPrinter&lt;/code&gt; keeps both defaults. This pattern may work well if you
+would like to reduce duplication and separate these records into
+difference namespaces.&lt;/p&gt;
+
+&lt;p&gt;Sample code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;; src/protocol_test/core.clj
+(ns protocol-tests.core)
+
+(defprotocol IPrinter
+  (output [this message])
+  (upper-case [this message]))
+
+(def PrinterDefaults
+  {:output (fn [this message]
+                (print message))
+   :upper-case (fn [this message]
+                 (clojure.string/upper-case message))})
+
+(defrecord TextPrinter [])
+(defrecord HtmlPrinter [])
+
+(extend TextPrinter
+  IPrinter
+  (merge PrinterDefaults))
+
+(extend HtmlPrinter
+  IPrinter
+  (merge PrinterDefaults
+         {:output (fn [this message]
+                       (print (str &quot;&amp;lt;p&amp;gt;&quot; (upper-case this message) &quot;&amp;lt;/p&amp;gt;&quot;)))}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;
+And the tests:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;; spec/protocol_tests/core_spec.clj
+(ns protocol-tests.core-spec
+  (:use [speclj.core]
+        [protocol-tests.core])
+  (:import [protocol_tests.core TextPrinter HtmlPrinter]))
+
+(describe &quot;core&quot;
+  (it &quot;returns the default functionality&quot;
+    (should= &quot;sample text&quot;
+             (with-out-str (output (TextPrinter.) &quot;sample text&quot;))))
+
+  (it &quot;returns the SAMPLE TEXT surrounded by a p tag&quot;
+    (should= &quot;&amp;lt;p&amp;gt;SAMPLE TEXT&amp;lt;/p&amp;gt;&quot;
+             (with-out-str (output (HtmlPrinter.) &quot;sample text&quot;)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;em&gt;Aside:&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Notice how I had to &lt;code&gt;import&lt;/code&gt; the records in the spec. I had to use an
+underscore in &lt;code&gt;protocol_tests.core&lt;/code&gt; which I believe is a bug in the 
+current version of Clojure (1.4).&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>First Day Practicing Joodo</title>
@@ -329,62 +410,6 @@ asked Corey his thoughts on how to approach the test for kata. Corey went
 on the whiteboard and gave some interesting ideas for that as well. I
 haven’t gotten to the Java server yet, but it was still interesting to
 hear their thoughts on the topic.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Minimax and Geekfest</title>
-   <category term="" />
-   <link href="http://sa.ndropad.in/2013/02/12/minimax-completed-and-geekfest.html"/>
-   <author>
-     <name>[]</name>
-   </author>
-   <updated>12 Feb 2013</updated>
-   <id>http://sa.ndropad.in/2013/02/12/minimax-completed-and-geekfest</id>
-   <content type="html">&lt;p&gt;Today I finished debugging my minimax algorithm implementation in
-Clojure. I finally figured out the bug in my code. I’d previously been
-returning a hash which included the position being returned by the recursive 
-call, whereas I should have just been returning the position from the current 
-loop iteration. &lt;/p&gt;
-
-&lt;p&gt;Here’s the finished simple minimax algorithm:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;min-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/get-empty-indices&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-              &lt;span class=&quot;ss&quot;&gt;:let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/set-mark-at-index&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]]&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/gameover?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;; this is where my bug was&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;-1000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;calculate-score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-             &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;max-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;inc &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-             &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fn &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&amp;lt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;val &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;max-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/get-empty-indices&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-              &lt;span class=&quot;ss&quot;&gt;:let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/set-mark-at-index&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]]&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/gameover?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;; this is where my bug was&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;calculate-score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-             &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;min-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;inc &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-             &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fn &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;val &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;
-This algorithm isn’t quite complete. It’s slow and not as smart as it can be. I’ll be 
-refactoring the algorithm to use &lt;a href=&quot;http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning&quot;&gt;Alpha-beta pruning&lt;/a&gt; tomorrow.&lt;/p&gt;
-
-&lt;p&gt;I took a break during lunch to go to my first &lt;a href=&quot;http://www.meetup.com/Geekfest/&quot;&gt;Geekfest&lt;/a&gt;. The topic today
-was Clojure which was cool as I’ve been working with it so
-much lately. The talk focused on ways to define macros and arguments 
-for and against using macros. Overall it was an interesting talk although a bit 
-complicated at points. I don’t really see myself applying what I learned
-about macros anytime soon, but I enjoyed the talk.&lt;/p&gt;
-
 </content>
  </entry>
  

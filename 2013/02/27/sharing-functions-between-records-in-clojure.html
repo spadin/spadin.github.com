@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sharing Functions Between Records in Clojure // Sandro Padin</title>
+<meta name="description" content="A blog by a resident apprentice at 8th Light">
+<meta name="author" content="Sandro Padin">
+
+<!-- /ht Andy Clarke - http://front.ie/lkCwyf -->
+<meta http-equiv="cleartype" content="on">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<link href='http://fonts.googleapis.com/css?family=Old+Standard+TT'
+rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="/link/to/favicon.ico">
+<link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="/stylesheets/base.css" media="all">
+<link rel="stylesheet" href="/stylesheets/module.css" media="all">
+<link rel="stylesheet" href="/stylesheets/state.css" media="all">
+<link rel="stylesheet" href="/stylesheets/github.css" media="all">
+
+<!-- /ht Jeremy Keith - http://front.ie/mLXiaS -->
+<link rel="stylesheet" href="/stylesheets/layout.css" media="all and (min-width: 33.236em)">
+<link rel="alternate" type="application/atom+xml" title="Subscribe to Sandro Padin's blog." href="/atom.xml"/>
+<!-- 30em + (1.618em * 2) = 33.236em / Eliminates potential of horizontal scrolling in most cases -->
+
+<script src="/js/libs/modernizr-1.7.min.js"></script>
+<!--<script type="text/javascript" src="http://use.typekit.com/yks8igg.js"></script>-->
+<!--<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h2 class="m-site-title">
+        <a href="/index.html">Sandro Padin</a>
+      </h2>
+      <section>
+        <p class="m-post-date">
+          February 27, 2013
+        </p>
+        <h1 class="m-post-title">
+          Sharing Functions Between Records in Clojure
+        </h1> 
+        <h2 class="m-post-subtitle">
+          
+        </h2>
+      </section>
+    </div>
+  </header>
+  
+  <div id="summary">
+    <div class="container cf">
+      <article>
+        <p>Today I came across a nice way to share functionality between records
+that extend the same protocol in Clojure. I recently wanted a way to
+encapsulate some functionality into a record via <code>defrecord</code> but noticed
+some duplication, after a little digging around I found some nice tips
+for doing this. Unfortunately, I can’t find those links in my history. I
+have the next best thing though, some test code examples.</p>
+
+<p>Notice in the example below that both <code>TextPrinter</code> and <code>HtmlPrinter</code>
+have access to the <code>ouput</code> function and <code>upper-case</code> function.
+<code>HtmlPrinter</code> overrides the default <code>output</code> function while
+<code>TextPrinter</code> keeps both defaults. This pattern may work well if you
+would like to reduce duplication and separate these records into
+difference namespaces.</p>
+
+<p>Sample code:</p>
+
+<pre><code>; src/protocol_test/core.clj
+(ns protocol-tests.core)
+
+(defprotocol IPrinter
+  (output [this message])
+  (upper-case [this message]))
+
+(def PrinterDefaults
+  {:output (fn [this message]
+                (print message))
+   :upper-case (fn [this message]
+                 (clojure.string/upper-case message))})
+
+(defrecord TextPrinter [])
+(defrecord HtmlPrinter [])
+
+(extend TextPrinter
+  IPrinter
+  (merge PrinterDefaults))
+
+(extend HtmlPrinter
+  IPrinter
+  (merge PrinterDefaults
+         {:output (fn [this message]
+                       (print (str "&lt;p&gt;" (upper-case this message) "&lt;/p&gt;")))}))
+</code></pre>
+
+<p><br />
+And the tests:</p>
+
+<pre><code>; spec/protocol_tests/core_spec.clj
+(ns protocol-tests.core-spec
+  (:use [speclj.core]
+        [protocol-tests.core])
+  (:import [protocol_tests.core TextPrinter HtmlPrinter]))
+
+(describe "core"
+  (it "returns the default functionality"
+    (should= "sample text"
+             (with-out-str (output (TextPrinter.) "sample text"))))
+
+  (it "returns the SAMPLE TEXT surrounded by a p tag"
+    (should= "&lt;p&gt;SAMPLE TEXT&lt;/p&gt;"
+             (with-out-str (output (HtmlPrinter.) "sample text")))))
+</code></pre>
+
+<p><br />
+<em>Aside:</em></p>
+
+<p>Notice how I had to <code>import</code> the records in the spec. I had to use an
+underscore in <code>protocol_tests.core</code> which I believe is a bug in the 
+current version of Clojure (1.4).</p>
+
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="clearfix">
+    <div class="container">
+      <div class="column">
+        <h3>Find Me</h3>
+        <a href="http://twitter.com/sandropadin"><img alt="twitter" src="/images/twitter.png"></a>
+        <a href="http://sa.ndropad.in/atom.xml"><img alt="rss" src="/images/rss.png"></a>
+      </div>
+
+      <div class="column">
+        <h3>About Me</h3>
+        <p>
+          Resident apprentice at<br>
+          <a href="http://www.8thlight.com">8th Light, Inc</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
