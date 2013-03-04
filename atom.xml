@@ -4,9 +4,37 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-02-27T22:36:24-06:00</updated>
+ <updated>2013-03-03T19:26:11-06:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Learning To Type</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/03/01/learning-to-type.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>01 Mar 2013</updated>
+   <id>http://sa.ndropad.in/2013/03/01/learning-to-type</id>
+   <content type="html">&lt;p&gt;I’ve been programming now for more than 5 years. I;ve developed my
+programming skills and knowledge nicely, but one thing I’ve never been happy
+with is my typing ability. While I’m not necessarily a hunt-and-peck
+typist, I am also not a confident typist. I ocassionally look down at the
+keyboard and am constantly fixing typos with the delete key. Overall, I
+would consider my typing very below average.&lt;/p&gt;
+
+&lt;p&gt;I’ve decided to change that. I’m taking an online typing course at
+&lt;a href=&quot;http://www.typingweb.com/&quot;&gt;TypyingWeb&lt;/a&gt; and will continue to practice my typing skills in the
+hopes of becoming comfortable with &lt;a href=&quot;http://en.wikipedia.org/wiki/Touch_typing&quot;&gt;touch typing&lt;/a&gt; and eventually type
+at least 80 words per minute confidently.&lt;/p&gt;
+
+&lt;p&gt;During my research into finding a free/cheap online typing program, I
+ran across this article by Jeff Atwood titled, “&lt;a href=&quot;http://www.codinghorror.com/blog/2008/11/we-are-typists-first-programmers-second.html&quot;&gt;We Are Typists First,
+Programmers Second&lt;/a&gt;,” which helped validate my resolution.&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Sharing Functions Between Records in Clojure</title>
@@ -378,38 +406,6 @@ morning. &lt;/p&gt;
 about half a day so hopefully I can make up some of the time I lost
 implementing Minimax.&lt;/p&gt;
 
-</content>
- </entry>
- 
- <entry>
-   <title>YASIM</title>
-   <category term="" />
-   <link href="http://sa.ndropad.in/2013/02/13/yasim.html"/>
-   <author>
-     <name>[]</name>
-   </author>
-   <updated>13 Feb 2013</updated>
-   <id>http://sa.ndropad.in/2013/02/13/yasim</id>
-   <content type="html">&lt;p&gt;I spent the day trying to implement the alpha-beta pruning search 
-algorithm. I’m not sure why it’s taking me so long to learn this algorithm. 
-Rick was kind enough to walk me through the algorithm as he understands 
-it this afternoon which was very helpful.&lt;/p&gt;
-
-&lt;p&gt;My major blockng point is visualizing the algorithm in the context of my
-Clojure Tic Tac Toe game. I’ve read several articles on this algorithm
-and on their own they make sense, but when I try to apply what I learn to 
-my game I get stuck. I feel I’m very close though and since this is the most 
-important part of my game the time I’m investing learning this algorithm 
-is well worth it.&lt;/p&gt;
-
-&lt;p&gt;This afternoon Corey Haines stopped by and hung out for a little bit.
-He was kind enough to give Rick and I his thoughts on Minimax and a
-different approach to thinking about the board and the moves. Rick
-mentioned that he was thinking of doing a kata on his Java server, and
-asked Corey his thoughts on how to approach the test for kata. Corey went 
-on the whiteboard and gave some interesting ideas for that as well. I
-haven’t gotten to the Java server yet, but it was still interesting to
-hear their thoughts on the topic.&lt;/p&gt;
 </content>
  </entry>
  
