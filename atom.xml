@@ -4,9 +4,106 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-03-05T20:47:16-06:00</updated>
+ <updated>2013-03-10T23:24:42-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Changing Key Bindings in Zsh</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/03/10/changing-key-bindings-in-zsh.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>10 Mar 2013</updated>
+   <id>http://sa.ndropad.in/2013/03/10/changing-key-bindings-in-zsh</id>
+   <content type="html">&lt;h1 id=&quot;key-bindings-in-zsh-with-bindkey&quot;&gt;Key bindings in zsh with bindkey&lt;/h1&gt;
+&lt;p&gt;I’ve recently had a newfound interest in trying to learn more about how
+exactly the tools I use on a day-to-day basis work. One of these tools
+is my terminal; in particular, I use the Zshell, or zsh. &lt;/p&gt;
+
+&lt;p&gt;One way that I use of traversing through my prompt is Option-Left arrow
+and Option-Right arrow to jump from word to word on the line. On
+occassion, I find the need to jump to the beginning or end of the line
+and end up either jumping word for word or just pressing and holding the
+arrow key. While I supposed either of these are fine, I thought there
+should be a quicker way to jump to the beginning or end of a line.&lt;/p&gt;
+
+&lt;p&gt;I began looking into key bindings, and this is what I found. These tips
+work well for me, using zsh and OS X, but as they say, your mileage may
+vary.&lt;/p&gt;
+
+&lt;h2 id=&quot;finding-a-key-sequence&quot;&gt;Finding a key sequence&lt;/h2&gt;
+&lt;p&gt;In order to bind a key to a command you need two things, a key and a
+command. A way to find the key, also known as the escape sequence, is by
+following a simple series of steps.&lt;/p&gt;
+
+&lt;p&gt;Typing Ctrl-v on your prompt reads the next character literally and
+prints it. You can try it by typing:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;    &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt;ctrl-v&amp;gt;&amp;lt;ctrl-vleft-arrow&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: actually enter Ctrl-v followed by the left arrow key.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Which should print:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;    &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;^&lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;D
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;You’re output may be different depending on yourour operating system.&lt;/p&gt;
+
+&lt;p&gt;Regardless of the actual ouput, you can now bind that output to a
+certain command, so for example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;    &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bindkey &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;ctrl-v&amp;gt;&amp;lt;ctrl+left-arrow&amp;gt;&amp;#39;&lt;/span&gt; beginning-of-line
+     &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bindkey &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;ctrl-v&amp;gt;&amp;lt;ctrl+right-arrow&amp;gt;&amp;#39;&lt;/span&gt; end-of-line
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;These will bind Ctrl+Left-arrow to move the cursor to the beginning
+of the line and Ctrl+Right-arrow to move the cursor to the end of the
+line.&lt;/p&gt;
+
+&lt;p&gt;To make these changes permanent, you would add these to lines to your
+&lt;code&gt;.zshrc&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;    bindkey &lt;span class=&quot;s1&quot;&gt;&amp;#39;^[[1;5D&amp;#39;&lt;/span&gt; beginning-of-line
+     bindkey &lt;span class=&quot;s1&quot;&gt;&amp;#39;^[[1;5C&amp;#39;&lt;/span&gt; end-of-line
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I believe that Ctrl-Left arrow/Right arrow may be used in Linux
+distros to move forward/backward one word, so you may want to bind these
+two commands to some other key sequence.&lt;/p&gt;
+
+&lt;p&gt;Check the resources below for more detailed information and a list of
+possible commands you can use for binding.&lt;/p&gt;
+
+&lt;h2 id=&quot;tmux-protip&quot;&gt;tmux protip&lt;/h2&gt;
+&lt;p&gt;If you notice these key bindings work as expected in Zsh, but stop
+working when using tmux, you may have to add this to your &lt;code&gt;~/.tmux.conf&lt;/code&gt;
+file.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;    set-window-option -g xterm-keys on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://zshwiki.org/home/zle/bindkeys&quot;&gt;ZshWiki - zle:bindkeys&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cs.elte.hu/zsh-manual/zsh_14.html&quot;&gt;Zsh Line Editor&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Mocking Records and Protocols</title>
@@ -431,33 +528,6 @@ and paste mistakes. &lt;/p&gt;
 &lt;p&gt;I’ll post updates this week with my findings. I’ll also be posting about
 &lt;a href=&quot;http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)&quot;&gt;SOLID&lt;/a&gt; this week in preparation of “teaching” Micah about the subject.&lt;/p&gt;
 
-</content>
- </entry>
- 
- <entry>
-   <title>Alpha-Beta Pruning</title>
-   <category term="" />
-   <link href="http://sa.ndropad.in/2013/02/18/alpha-beta-pruning.html"/>
-   <author>
-     <name>[]</name>
-   </author>
-   <updated>18 Feb 2013</updated>
-   <id>http://sa.ndropad.in/2013/02/18/alpha-beta-pruning</id>
-   <content type="html">&lt;p&gt;After a week of struggling with the implementation, I finally got
-Minimax with alpha-beta pruning working.&lt;/p&gt;
-
-&lt;p&gt;I found it difficult to debug my code. I had some print statements
-peppered throughout the code but with the recursive nature of this
-algorithm, it was tough to really step through the code in order to
-determine where my bugs were. It took a combination of print statements
-and working through the code by hand for me to finally figure out what
-was going wrong, missing return variables.&lt;/p&gt;
-
-&lt;p&gt;While the process was tedious, I can appreciate having gone through it.
-Now I can confidently say I understand the Minimax algorithm and the
-alpha-beta pruning aspect of it as well. &lt;/p&gt;
-
-&lt;p&gt;Now on to my next task of creating a 4x4 board and a 3x3x3 game.&lt;/p&gt;
 </content>
  </entry>
  
