@@ -64,11 +64,13 @@ footer h3 {
   height: 30px;
 }
 
+pre {
+  padding-bottom: 20px;
+}
 code {
   background-color: #ececec;
   font-family: "Monaco", mono;
   font-size: 0.7em;
-  padding: 2px 5px;
   border-radius: 5px;
 }
 .highlight code {

@@ -4,9 +4,55 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-03-10T23:24:42-05:00</updated>
+ <updated>2013-03-14T16:26:16-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Jerver, part 1</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/03/14/jerver.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>14 Mar 2013</updated>
+   <id>http://sa.ndropad.in/2013/03/14/jerver</id>
+   <content type="html">&lt;p&gt;I’ve spent this week learning about sockets and reading RFCs in order to
+create a Java-based web server. I call it &lt;a href=&quot;https://github.com/spadin/Jerver&quot;&gt;Jerver&lt;/a&gt;. (Can you tell I like
+&lt;a href=&quot;http://en.wikipedia.org/wiki/Portmanteau&quot;&gt;portmanteaus&lt;/a&gt;; &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;Ticlj&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://github.com/spadin/taclj&quot;&gt;Taclj&lt;/a&gt;) It’s been a fun and
+challenging week.&lt;/p&gt;
+
+&lt;p&gt;I was pretty worried when I was tasked to create a web server in one
+week. Granted, the requirements did not call for a fully-featured web sever,
+but a web server, nonetheless.&lt;/p&gt;
+
+&lt;p&gt;While I’ve never written a web server, I have researched the topic a bit
+for my own knowledge. &lt;/p&gt;
+
+&lt;p&gt;My initial accessment was that a server would need to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    * Accept a connection
+    * Parse a request
+    * Interpret headers
+    * Parse HTTP params
+      * Parse content-length
+    * Determine HTTP method (GET, POST, HEAD, etc)
+      * Route a request to a resource
+      * Determine the mime type of the resource
+      * Write the response back through the connection
+      * Close the connection
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While there are more intermediary steps that I may need to add
+eventually, these simple steps are enough to get a web-server running.&lt;/p&gt;
+
+&lt;p&gt;I will be writing a series of posts on my design decisions for
+implementing this web server. As mentioned above, this is not a
+feature-complete web-server, but could serve as a good way to learn
+about servers and a good starting point for your own implementations.&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Changing Key Bindings in Zsh</title>
@@ -505,28 +551,6 @@ the provided is very useful and prensented clearly.&lt;/p&gt;
 
 &lt;p&gt;Although the setup for these plugins is a little difficult, I still
 recommend taking the half hour to an hour it takes and check them out.&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>4x4 Tic Tac Toe</title>
-   <category term="" />
-   <link href="http://sa.ndropad.in/2013/02/19/4x4-tic-tac-toe.html"/>
-   <author>
-     <name>[]</name>
-   </author>
-   <updated>19 Feb 2013</updated>
-   <id>http://sa.ndropad.in/2013/02/19/4x4-tic-tac-toe</id>
-   <content type="html">&lt;p&gt;I spent the majority of the day determining how I should add the 4x4
-game to my implementation. As far as I can tell there are three major
-parts that change: the rules, printer and board. I will likely convert
-these to protocols and define types for them. I’m interested in seeing
-how I can refactor my code effectively and reduce bugs from simple copy
-and paste mistakes. &lt;/p&gt;
-
-&lt;p&gt;I’ll post updates this week with my findings. I’ll also be posting about
-&lt;a href=&quot;http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)&quot;&gt;SOLID&lt;/a&gt; this week in preparation of “teaching” Micah about the subject.&lt;/p&gt;
 
 </content>
  </entry>

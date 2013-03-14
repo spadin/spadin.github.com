@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jerver, part 1 // Sandro Padin</title>
+<meta name="description" content="A blog by a resident apprentice at 8th Light">
+<meta name="author" content="Sandro Padin">
+
+<!-- /ht Andy Clarke - http://front.ie/lkCwyf -->
+<meta http-equiv="cleartype" content="on">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<link href='http://fonts.googleapis.com/css?family=Old+Standard+TT'
+rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="/link/to/favicon.ico">
+<link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="/stylesheets/base.css" media="all">
+<link rel="stylesheet" href="/stylesheets/module.css" media="all">
+<link rel="stylesheet" href="/stylesheets/state.css" media="all">
+<link rel="stylesheet" href="/stylesheets/github.css" media="all">
+
+<!-- /ht Jeremy Keith - http://front.ie/mLXiaS -->
+<link rel="stylesheet" href="/stylesheets/layout.css" media="all and (min-width: 33.236em)">
+<link rel="alternate" type="application/atom+xml" title="Subscribe to Sandro Padin's blog." href="/atom.xml"/>
+<!-- 30em + (1.618em * 2) = 33.236em / Eliminates potential of horizontal scrolling in most cases -->
+
+<script src="/js/libs/modernizr-1.7.min.js"></script>
+<!--<script type="text/javascript" src="http://use.typekit.com/yks8igg.js"></script>-->
+<!--<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h2 class="m-site-title">
+        <a href="/index.html">Sandro Padin</a>
+      </h2>
+      <section>
+        <p class="m-post-date">
+          March 14, 2013
+        </p>
+        <h1 class="m-post-title">
+          Jerver, part 1
+        </h1> 
+        <h2 class="m-post-subtitle">
+          A Java-based web server
+        </h2>
+      </section>
+    </div>
+  </header>
+  
+  <div id="summary">
+    <div class="container cf">
+      <article>
+        <p>I’ve spent this week learning about sockets and reading RFCs in order to
+create a Java-based web server. I call it <a href="https://github.com/spadin/Jerver">Jerver</a>. (Can you tell I like
+<a href="http://en.wikipedia.org/wiki/Portmanteau">portmanteaus</a>; <a href="https://github.com/spadin/ticlj">Ticlj</a> &amp; <a href="https://github.com/spadin/taclj">Taclj</a>) It’s been a fun and
+challenging week.</p>
+
+<p>I was pretty worried when I was tasked to create a web server in one
+week. Granted, the requirements did not call for a fully-featured web sever,
+but a web server, nonetheless.</p>
+
+<p>While I’ve never written a web server, I have researched the topic a bit
+for my own knowledge. </p>
+
+<p>My initial accessment was that a server would need to:</p>
+
+<pre><code>    * Accept a connection
+    * Parse a request
+    * Interpret headers
+    * Parse HTTP params
+      * Parse content-length
+    * Determine HTTP method (GET, POST, HEAD, etc)
+      * Route a request to a resource
+      * Determine the mime type of the resource
+      * Write the response back through the connection
+      * Close the connection
+</code></pre>
+
+<p>While there are more intermediary steps that I may need to add
+eventually, these simple steps are enough to get a web-server running.</p>
+
+<p>I will be writing a series of posts on my design decisions for
+implementing this web server. As mentioned above, this is not a
+feature-complete web-server, but could serve as a good way to learn
+about servers and a good starting point for your own implementations.</p>
+
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="clearfix">
+    <div class="container">
+      <div class="column">
+        <h3>Find Me</h3>
+        <a href="http://twitter.com/sandropadin"><img alt="twitter" src="/images/twitter.png"></a>
+        <a href="http://sa.ndropad.in/atom.xml"><img alt="rss" src="/images/rss.png"></a>
+      </div>
+
+      <div class="column">
+        <h3>About Me</h3>
+        <p>
+          Resident apprentice at<br>
+          <a href="http://www.8thlight.com">8th Light, Inc</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
