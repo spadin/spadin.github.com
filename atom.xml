@@ -4,7 +4,7 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-03-27T22:34:41-05:00</updated>
+ <updated>2013-03-27T22:40:26-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
  
@@ -46,15 +46,16 @@ is being rendered.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Joodo has an analogous way of passing data to your &lt;a href=&quot;https://github.com/weavejester/hiccup&quot;&gt;Hiccup&lt;/a&gt; view;
 it’s done via the &lt;code&gt;*view-context*&lt;/code&gt; binding. &lt;/p&gt;
 
-&lt;p&gt;Rendering a Hiccup template with using is done in a controller via:&lt;/p&gt;
+&lt;p&gt;Rendering a Hiccup template with Joodo is done in the controller:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GET&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;/hello/:first-name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fn &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;first-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;render_template&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:first-name&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;first-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now in your &lt;code&gt;hello.hiccup.clj&lt;/code&gt; you are able to retrieve and use the first name as such:&lt;/p&gt;
+&lt;p&gt;Now in your &lt;code&gt;hello.hiccup.clj&lt;/code&gt; you are able to retrieve and use the
+parameter:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello &amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first-name&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;*view-context*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))]&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello &amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:first-name&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;*view-context*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;or nicer yet, especially if you use first name more than once.&lt;/p&gt;
@@ -66,9 +67,9 @@ it’s done via the &lt;code&gt;*view-context*&lt;/code&gt; binding. &lt;/p&gt;
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
 &lt;p&gt;Passing parameters to Hiccup views in Clojure is more akin to &lt;a href=&quot;http://xyzpub.com/en/ruby-on-rails/3.2/dynamische_webseiten.html#partials_locale_variables&quot;&gt;passing
-locals with Sinatra&lt;/a&gt; in that they have to be explicitly declare. I didn’t
+locals with Sinatra&lt;/a&gt; in that they have to be explicitly declared. I didn’t
 lead with that though since a majority of people are familiar with
-sending and using the instance variables instead.&lt;/p&gt;
+sending and using instance variables instead.&lt;/p&gt;
 
 &lt;p&gt;Final note: The Joodo &lt;code&gt;*view-context*&lt;/code&gt; is a globally available binding for the current
 request that is being rendered. As such, it can be accessed from your

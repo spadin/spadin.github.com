@@ -83,15 +83,16 @@ is being rendered.</em></p>
 <p>Joodo has an analogous way of passing data to your <a href="https://github.com/weavejester/hiccup">Hiccup</a> view;
 it’s done via the <code>*view-context*</code> binding. </p>
 
-<p>Rendering a Hiccup template with using is done in a controller via:</p>
+<p>Rendering a Hiccup template with Joodo is done in the controller:</p>
 
 <div class="highlight"><pre><code class="clojure">    <span class="p">(</span><span class="nf">GET</span> <span class="ss">&#39;/hello/:first-name</span><span class="o">&#39;</span> <span class="p">[]</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">first-name</span><span class="p">]</span>
       <span class="p">(</span><span class="nf">render_template</span> <span class="ss">&#39;hello</span><span class="o">&#39;</span> <span class="ss">:first-name</span> <span class="nv">first-name</span><span class="p">)))</span>
 </code></pre></div>
 
-<p>Now in your <code>hello.hiccup.clj</code> you are able to retrieve and use the first name as such:</p>
+<p>Now in your <code>hello.hiccup.clj</code> you are able to retrieve and use the
+parameter:</p>
 
-<div class="highlight"><pre><code class="clojure">    <span class="p">[</span><span class="ss">:p</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Hello &quot;</span> <span class="p">(</span><span class="nf">first-name</span> <span class="nv">*view-context*</span><span class="p">))]</span>
+<div class="highlight"><pre><code class="clojure">    <span class="p">[</span><span class="ss">:p</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Hello &quot;</span> <span class="p">(</span><span class="ss">:first-name</span> <span class="nv">*view-context*</span><span class="p">))]</span>
 </code></pre></div>
 
 <p>or nicer yet, especially if you use first name more than once.</p>
@@ -103,9 +104,9 @@ it’s done via the <code>*view-context*</code> binding. </p>
 <h3 id="conclusion">Conclusion</h3>
 
 <p>Passing parameters to Hiccup views in Clojure is more akin to <a href="http://xyzpub.com/en/ruby-on-rails/3.2/dynamische_webseiten.html#partials_locale_variables">passing
-locals with Sinatra</a> in that they have to be explicitly declare. I didn’t
+locals with Sinatra</a> in that they have to be explicitly declared. I didn’t
 lead with that though since a majority of people are familiar with
-sending and using the instance variables instead.</p>
+sending and using instance variables instead.</p>
 
 <p>Final note: The Joodo <code>*view-context*</code> is a globally available binding for the current
 request that is being rendered. As such, it can be accessed from your
