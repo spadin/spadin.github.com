@@ -42,7 +42,7 @@ img, embed, object, video { max-width: 100%; }
 
 body {
   color:#000;
-  font-family:'Old Standard TT',sans-serif;
+  font-family: sans-serif;
   font-size:100%;
   font-style:normal;
   font-weight:300;
@@ -51,8 +51,7 @@ body {
 
 h1 { 
   color: #333;
-
-  font-family:'Old Standard TT',sans-serif;
+  font-family: sans-serif;
   font-size: 3.33em;
   font-style: normal;
   font-weight: 700;
@@ -65,8 +64,7 @@ h1 {
 
 h2 {
   color: #333;
-
-  font-family: 'Old Standard TT',sans-serif;
+  font-family: sans-serif;
   font-size: 1.9em;
   font-style: normal;
   font-weight: 200;
@@ -78,7 +76,7 @@ h2 {
 h3 {
   color: #333;
 
-  font-family: 'Old Standard TT',sans-serif;
+  font-family: sans-serif;
   font-size: 1.333em;
   font-style: normal;
   font-weight: 300;

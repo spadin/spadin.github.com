@@ -4,9 +4,92 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-03-27T22:40:26-05:00</updated>
+ <updated>2013-03-28T14:53:57-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Using a Local Jar in Your Clojure Project</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/03/28/using-a-local-jar-in-your-clojure-project.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>28 Mar 2013</updated>
+   <id>http://sa.ndropad.in/2013/03/28/using-a-local-jar-in-your-clojure-project</id>
+   <content type="html">&lt;p&gt;I recently wrote a simple Java web server named &lt;a href=&quot;https://github.com/spadin/Jerver&quot;&gt;Jerver&lt;/a&gt; as a task during
+my apprenticeship. After completing the server, my next task was to use
+that server in Clojure and integrate it with &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;Ticlj&lt;/a&gt;, my Clojure-based Tic
+Tac Toe game. I was to package the Java server as a .jar that I would
+somehow use in &lt;a href=&quot;https://github.com/spadin/ticlj-on-jerver&quot;&gt;my new project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’d previously used libraries like &lt;a href=&quot;https://github.com/slagyr/speclj&quot;&gt;Speclj&lt;/a&gt; and &lt;a href=&quot;https://github.com/slagyr/joodo&quot;&gt;Joodo&lt;/a&gt; which have stable
+and documented APIs. My Java server was neither stable nor documented,
+so I needed a way to quickly and reliably update the server jar when I
+realized and implemented new APIs I needed to expose to my Clojure project.&lt;/p&gt;
+
+&lt;p&gt;I noticed up front this needed to be some sort of shell script which
+runs the series of Maven commands for importing the jar from my server
+project.&lt;/p&gt;
+
+&lt;p&gt;I came up with the &lt;a href=&quot;https://gist.github.com/spadin/5265773&quot;&gt;following shell script&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;    mkdir -p lib/local
+ 
+    &lt;span class=&quot;c&quot;&gt;# Set some defaults for JAR_VERSION, JAR_SOURCE and ARTIFACT_ID below.&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;JAR_VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAR_VERSION&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:=0.0.1-SNAPSHOT&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;JAR_SOURCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAR_SOURCE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:=/Users/sandropadin/IdeaProjects/Jerver/target/jerver.jar&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;ARTIFACT_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ARTIFACT_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:=jerver&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+     
+    mvn deploy:deploy-file -DgroupId&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                           -DartifactId&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ARTIFACT_ID&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                           -Dversion&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$JAR_VERSION&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                           -Dpackaging&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;jar &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                           -Dfile&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$JAR_SOURCE&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+                           -Durl&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;file:lib
+     
+     mvn -U dependency:resolve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I saved this file at &lt;code&gt;script/import-jar&lt;/code&gt; made it executable (chmod +x)
+then I called it like so:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;     &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;script/import-jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I would then just run this command multiple times during my development
+process to quickly update the jar my Clojure project was using.&lt;/p&gt;
+
+&lt;p&gt;The Clojure project.clj imports the jar:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;ss&quot;&gt;:dependencies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;org.clojure/clojure&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;1.5.1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local/jerver&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;0.0.1-SNAPSHOT&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then my code uses the classes within the jar:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;ns &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ticlj-on-jerver.api.resolver&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:use&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ticlj-on-jerver.api.response&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:only&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;set-status-code&lt;/span&gt;
+                                                 &lt;span class=&quot;nv&quot;&gt;add-header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]))&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defrecord &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Resolver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;; This is an interface defined in the Java server&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;com.jerver.http.route.Routable&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;resolve &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;callback&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:callback&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;callback&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;resolver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Resolver.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After all the setup, once I made a change to the Java server project, I
+would generate the package using Maven, then run my &lt;code&gt;import-jar&lt;/code&gt; script
+to import the newly generated package and update the dependencies in my
+Clojure project.&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Joodo *view-context*</title>
@@ -552,41 +635,6 @@ class.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;
 I hope this helps anyone experiencing trouble installing Ruby 2.0.0&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Four-by-four Tic Tac Toe</title>
-   <category term="" />
-   <link href="http://sa.ndropad.in/2013/02/21/four-by-four-tic-tac-toe.html"/>
-   <author>
-     <name>[]</name>
-   </author>
-   <updated>21 Feb 2013</updated>
-   <id>http://sa.ndropad.in/2013/02/21/four-by-four-tic-tac-toe</id>
-   <content type="html">&lt;p&gt;I started refactoring my code in preparation of implementing the 4x4
-board and the eventual 3x3x3 board. I began by re-namespacing my files
-for clarity. In my main &lt;code&gt;ticlj&lt;/code&gt; directory, I now have &lt;code&gt;board&lt;/code&gt;, &lt;code&gt;player&lt;/code&gt;,
-&lt;code&gt;printer&lt;/code&gt; and &lt;code&gt;rules&lt;/code&gt; as directories and &lt;code&gt;core.clj&lt;/code&gt; as the only file in the
-root directory. I felt this cleaned up the root directory and made the
-subdirectory names more meaningful. I previously had &lt;code&gt;model&lt;/code&gt; and &lt;code&gt;io&lt;/code&gt; as the
-only subdirectories of the root which weren’t very clear. &lt;/p&gt;
-
-&lt;p&gt;I also began converting functions to use multi-methods as their data source 
-and the process has been pretty straightforward. &lt;/p&gt;
-
-&lt;p&gt;I worked my way through adding new tests that needed a 4x4 counterpart.
-Once done, I realized I hadn’t ran the game once to see how things were
-going and I was very proud. After making sure there weren’t any missing
-tests, I fired up the game and everything worked right off the bat. The
-4x4 board printed as expected and the AI’s played without problems (aside
-form performance issues). Everything worked as well, if not better than I 
-could have hoped for the first run.&lt;/p&gt;
-
-&lt;p&gt;Now I think the 3x3x3 Tic Tac Toe game should be very easy to implement
-as well. I’ll be doing that next week.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Sidenote: It’s my mom’s 71st Birthday today. :tada:&lt;/em&gt;&lt;/p&gt;
 </content>
  </entry>
  
