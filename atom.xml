@@ -4,9 +4,79 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-03-14T16:26:16-05:00</updated>
+ <updated>2013-03-27T22:34:41-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Joodo *view-context*</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/03/27/joodo-view-context.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>27 Mar 2013</updated>
+   <id>http://sa.ndropad.in/2013/03/27/joodo-view-context</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/slagyr/joodo&quot;&gt;Joodo&lt;/a&gt; is a web framework for Clojure, similar to &lt;a href=&quot;https://github.com/sinatra/sinatra&quot;&gt;Sinatra&lt;/a&gt; for
+Ruby. &lt;/p&gt;
+
+&lt;p&gt;If you’ve tried Sinatra you’ve probably used variables inside of
+views. A common way to do this is by setting an instance variable in the
+controller:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;    &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/hello/:name&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;vi&quot;&gt;@name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;erb&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:hello&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which then &lt;em&gt;magically&lt;/em&gt; grants you the ability to use that variable in the
+view:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;erb&quot;&gt;&lt;span class=&quot;x&quot;&gt;    &amp;lt;p&amp;gt;Hello &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@name&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I say magically, because it’s not clear up front how those instance
+variables get passed to the view. &lt;em&gt;Hint: Sinatra, like Rails, uses &lt;a href=&quot;https://github.com/rtomayko/tilt&quot;&gt;Tilt&lt;/a&gt;
+to render templates, which allows &lt;a href=&quot;https://github.com/rtomayko/tilt/blob/master/lib/tilt/template.rb#L76-L78&quot;&gt;setting a scope for the template&lt;/a&gt; that
+is being rendered.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;enough-about-ruby-what-does-this-have-to-do-with-joodo-and-clojure&quot;&gt;Enough about Ruby, what does this have to do with Joodo and Clojure?&lt;/h3&gt;
+
+&lt;p&gt;Joodo has an analogous way of passing data to your &lt;a href=&quot;https://github.com/weavejester/hiccup&quot;&gt;Hiccup&lt;/a&gt; view;
+it’s done via the &lt;code&gt;*view-context*&lt;/code&gt; binding. &lt;/p&gt;
+
+&lt;p&gt;Rendering a Hiccup template with using is done in a controller via:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GET&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;/hello/:first-name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fn &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;first-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;render_template&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:first-name&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;first-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now in your &lt;code&gt;hello.hiccup.clj&lt;/code&gt; you are able to retrieve and use the first name as such:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello &amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first-name&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;*view-context*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;or nicer yet, especially if you use first name more than once.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;first-name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:first-name&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;*view-context*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello &amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;first-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Passing parameters to Hiccup views in Clojure is more akin to &lt;a href=&quot;http://xyzpub.com/en/ruby-on-rails/3.2/dynamische_webseiten.html#partials_locale_variables&quot;&gt;passing
+locals with Sinatra&lt;/a&gt; in that they have to be explicitly declare. I didn’t
+lead with that though since a majority of people are familiar with
+sending and using the instance variables instead.&lt;/p&gt;
+
+&lt;p&gt;Final note: The Joodo &lt;code&gt;*view-context*&lt;/code&gt; is a globally available binding for the current
+request that is being rendered. As such, it can be accessed from your
+&lt;code&gt;layout.hiccup.clj&lt;/code&gt; as well as any partials that you may need to render
+as well.&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Jerver, part 1</title>
@@ -427,8 +497,8 @@ class EmployeePay
 end
 
 # employee.rb
-require 'employee_time'
-require 'employee_pay'
+require &#39;employee_time&#39;
+require &#39;employee_pay&#39;
 
 class Employee
   include EmployeeTime
@@ -516,42 +586,6 @@ could have hoped for the first run.&lt;/p&gt;
 as well. I’ll be doing that next week.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Sidenote: It’s my mom’s 71st Birthday today. :tada:&lt;/em&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Powerline</title>
-   <category term="" />
-   <link href="http://sa.ndropad.in/2013/02/20/powerline.html"/>
-   <author>
-     <name>[]</name>
-   </author>
-   <updated>20 Feb 2013</updated>
-   <id>http://sa.ndropad.in/2013/02/20/powerline</id>
-   <content type="html">&lt;p&gt;I ran across a cool Vim plugin today named, &lt;a href=&quot;https://github.com/Lokaltog/powerline&quot;&gt;Powerline&lt;/a&gt;. It nicely decorates
-your Vim status line and includes VCS status, file path, file type,
-etc. My previous status line was hard to read and understand so I hardly
-looked at it.&lt;/p&gt;
-
-&lt;p&gt;Here’s a look at my new Vim status line:
-&lt;a href=&quot;/images/powerline-vim.png&quot;&gt;&lt;img src=&quot;/images/powerline-vim.png&quot; alt=&quot;Vim Powerline status line&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Along the way, while figuring out how to configure Powerline for Vim, I
-ran across &lt;a href=&quot;https://github.com/erikw/tmux-powerline&quot;&gt;tmux-powerline&lt;/a&gt; which decorates tmux’s status line. The
-concept is directly taken from Powerline, but there are more widgets
-for showing different information, including: WAN and
-LAN IP, your current Git branch and status, weather, and a few
-more.&lt;/p&gt;
-
-&lt;p&gt;Here’s a look at my new tmux status line:
-&lt;a href=&quot;/images/tmux-powerline.png&quot;&gt;&lt;img src=&quot;/images/tmux-powerline.png&quot; alt=&quot;tmux-powerline status line&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Both plugins look nice, but besides the aesthetics, the information
-the provided is very useful and prensented clearly.&lt;/p&gt;
-
-&lt;p&gt;Although the setup for these plugins is a little difficult, I still
-recommend taking the half hour to an hour it takes and check them out.&lt;/p&gt;
-
 </content>
  </entry>
  
