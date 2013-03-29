@@ -66,17 +66,17 @@ for my own knowledge. </p>
 
 <p>My initial accessment was that a server would need to:</p>
 
-<pre><code>    * Accept a connection
-    * Parse a request
-    * Interpret headers
-    * Parse HTTP params
-      * Parse content-length
-    * Determine HTTP method (GET, POST, HEAD, etc)
-      * Route a request to a resource
-      * Determine the mime type of the resource
-      * Write the response back through the connection
-      * Close the connection
-</code></pre>
+<div class="highlight"><pre><code class="text">        * Accept a connection
+        * Parse a request
+        * Interpret headers
+        * Parse HTTP params
+          * Parse content-length
+        * Determine HTTP method (GET, POST, HEAD, etc)
+          * Route a request to a resource
+          * Determine the mime type of the resource
+          * Write the response back through the connection
+          * Close the connection
+</code></pre></div>
 
 <p>While there are more intermediary steps that I may need to add
 eventually, these simple steps are enough to get a web-server running.</p>

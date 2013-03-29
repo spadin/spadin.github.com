@@ -123,8 +123,8 @@ small { font-size: 80%; }
 
 /* 4. LINKS
 ----------------------------------------------------------------------------------------*/
-a, a:visited { outline: none; color: #32A5F5; text-decoration: underline; }  
-a:hover { outline: none; text-decoration:none; }  
+a, a:visited { outline: none; color: #32A5F5; text-decoration: none; }  
+a:hover { outline: none; text-decoration:underline; }  
 a:active, a:focus { outline: none; }
 
 
@@ -134,4 +134,16 @@ small {
 }
 .post-title {
   font-size: 1.2em;
+}
+.m-site-title a {
+  color: #333;
+}
+.m-site-title a:hover {
+  color: #666 !important;
+}
+footer {
+  display: none;
+}
+.blogpost-list h1 {
+  margin: 0.5em 0;
 }

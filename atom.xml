@@ -4,7 +4,7 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-03-28T14:53:57-05:00</updated>
+ <updated>2013-03-29T18:53:01-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
  
@@ -185,17 +185,17 @@ for my own knowledge. &lt;/p&gt;
 
 &lt;p&gt;My initial accessment was that a server would need to:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    * Accept a connection
-    * Parse a request
-    * Interpret headers
-    * Parse HTTP params
-      * Parse content-length
-    * Determine HTTP method (GET, POST, HEAD, etc)
-      * Route a request to a resource
-      * Determine the mime type of the resource
-      * Write the response back through the connection
-      * Close the connection
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;        * Accept a connection
+        * Parse a request
+        * Interpret headers
+        * Parse HTTP params
+          * Parse content-length
+        * Determine HTTP method (GET, POST, HEAD, etc)
+          * Route a request to a resource
+          * Determine the mime type of the resource
+          * Write the response back through the connection
+          * Close the connection
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;While there are more intermediary steps that I may need to add
 eventually, these simple steps are enough to get a web-server running.&lt;/p&gt;

@@ -8,19 +8,14 @@
 
 
 .m-site-title {
-  color: #32A5F5;
-
-  font-family: 'Old Standard TT';
-  font-size: 1.777em;
+  font-size: 5em;
   font-style: normal;
   font-weight: 200;
   text-decoration: none;
-
-  margin-top: 2em;
+  margin: 0;
 }
 
 .m-site-title a {
-  color: #32A5F5;
   text-decoration: none;
 }
 
@@ -29,12 +24,12 @@
 }
 
 .m-post-date {
-  margin: 4em 0 0 0;
+  margin: 0;
 }
 
 .m-post-title {
   display: block;
-  margin: 0.5em 0 1em 0;
+  margin: 0;
 }
 
 .m-post-subtitle {
