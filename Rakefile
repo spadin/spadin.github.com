@@ -20,7 +20,7 @@ desc "Update master branch"
 task :update do
   dir = File.dirname(__FILE__)
   system "cd #{dir}"
-  system "rm -r 2013 images js lib spec stylesheets"
+  system "rm -r 2013 images components lib spec stylesheets"
   system "git checkout source _site/"
   system "mv _site/* ./"
   system "rm -r _site"
