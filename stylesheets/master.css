@@ -1,0 +1,64 @@
+body {
+  margin: 0 5px;
+  color: #333;
+  background: #efefef url(/images/paper_fibers.png) repeat;
+}
+
+a {
+  text-decoration: none;
+  color: #32A5F5;
+}
+
+header h1 {
+  font-size: 5em;
+  margin: 0;
+}
+
+header h1 a {
+  color: #333;
+}
+
+header h1 a:hover {
+  color: #666;
+}
+
+article header h1 {
+  font-size: 3em;
+}
+
+section h1 {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+h2 {
+  margin: 0;
+  color: #6f6f6f;
+}
+
+li.post-title {
+  line-height: 1.5em;
+}
+
+.highlight {
+  font-size: 0.75em;
+  overflow: scroll;
+}
+
+.highlight pre {
+  white-space: pre;
+}
+
+@media
+  screen and (device-aspect-ratio: 40/71),
+  screen and (device-aspect-ratio: 2/3) {
+  header h1 {
+    font-size: 3em;
+  }
+  article header h1 {
+    font-size: 2em;
+}
