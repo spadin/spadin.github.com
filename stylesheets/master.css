@@ -1,5 +1,6 @@
 body {
-  margin: 0 5px;
+  width: 860px;
+  margin: 0 auto;
   color: #333;
   background: #efefef url(/images/paper_fibers.png) repeat;
 }
@@ -56,6 +57,10 @@ li.post-title {
 @media
   screen and (device-aspect-ratio: 40/71),
   screen and (device-aspect-ratio: 2/3) {
+  body {
+    width: auto;
+    margin: 0 5px;
+  }
   header h1 {
     font-size: 3em;
   }
