@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<title>Sharing Functions Between Records in Clojure // Sandro Padin</title>
+<meta name="author" content="Sandro Padin">
+
+<meta http-equiv="cleartype" content="on">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="shortcut icon" href="/link/to/favicon.ico">
+<link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/components/normalize-css/normalize.css" media="all">
+<link rel="stylesheet" href="/stylesheets/github.css" media="all">
+<link rel="stylesheet" href="/stylesheets/master.css" media="all">
+<link rel="alternate" type="application/atom+xml" title="Subscribe to Sandro Padin's blog." href="/atom.xml"/>
+<script src="http://dabblet.com/code/prefixfree.min.js"></script>
+
+</head>
+<body>
+  <header>
+    <h1><a href="/">Sandro Padin</a></h1>
+  </header>
+  <article>
+    <header>
+      <time pubdate>February 27, 2013</time>
+      <h1>Sharing Functions Between Records in Clojure</h1>
+      <h2></h2>
+    </header>
+    <p>Today I came across a nice way to share functionality between records
+that extend the same protocol in Clojure. I recently wanted a way to
+encapsulate some functionality into a record via <code>defrecord</code> but noticed
+some duplication, after a little digging around I found some nice tips
+for doing this. Unfortunately, I can’t find those links in my history. I
+have the next best thing though, some test code examples.</p>
+
+<p>Notice in the example below that both <code>TextPrinter</code> and <code>HtmlPrinter</code>
+have access to the <code>ouput</code> function and <code>upper-case</code> function.
+<code>HtmlPrinter</code> overrides the default <code>output</code> function while
+<code>TextPrinter</code> keeps both defaults. This pattern may work well if you
+would like to reduce duplication and separate these records into
+difference namespaces.</p>
+
+<p>Sample code:</p>
+
+<div class="highlight"><pre><code class="clojure">    <span class="c1">; src/protocol_test/core.clj</span>
+    <span class="p">(</span><span class="kd">ns </span><span class="nv">protocol-tests.core</span><span class="p">)</span>
+
+    <span class="p">(</span><span class="kd">defprotocol </span><span class="nv">IPrinter</span>
+      <span class="p">(</span><span class="nf">output</span> <span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">])</span>
+      <span class="p">(</span><span class="nf">upper-case</span> <span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">]))</span>
+
+    <span class="p">(</span><span class="k">def </span><span class="nv">PrinterDefaults</span>
+      <span class="p">{</span><span class="ss">:output</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">]</span>
+                    <span class="p">(</span><span class="nb">print </span><span class="nv">message</span><span class="p">))</span>
+       <span class="ss">:upper-case</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">]</span>
+                     <span class="p">(</span><span class="nf">clojure.string/upper-case</span> <span class="nv">message</span><span class="p">))})</span>
+
+    <span class="p">(</span><span class="kd">defrecord </span><span class="nv">TextPrinter</span> <span class="p">[])</span>
+    <span class="p">(</span><span class="kd">defrecord </span><span class="nv">HtmlPrinter</span> <span class="p">[])</span>
+
+    <span class="p">(</span><span class="nf">extend</span> <span class="nv">TextPrinter</span>
+      <span class="nv">IPrinter</span>
+      <span class="p">(</span><span class="nb">merge </span><span class="nv">PrinterDefaults</span><span class="p">))</span>
+
+    <span class="p">(</span><span class="nf">extend</span> <span class="nv">HtmlPrinter</span>
+      <span class="nv">IPrinter</span>
+      <span class="p">(</span><span class="nb">merge </span><span class="nv">PrinterDefaults</span>
+             <span class="p">{</span><span class="ss">:output</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">this</span> <span class="nv">message</span><span class="p">]</span>
+                           <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;&lt;p&gt;&quot;</span> <span class="p">(</span><span class="nf">upper-case</span> <span class="nv">this</span> <span class="nv">message</span><span class="p">)</span> <span class="s">&quot;&lt;/p&gt;&quot;</span><span class="p">)))}))</span>
+</code></pre></div>
+
+<p><br />
+And the tests:</p>
+
+<div class="highlight"><pre><code class="clojure">    <span class="c1">; spec/protocol_tests/core_spec.clj</span>
+    <span class="p">(</span><span class="kd">ns </span><span class="nv">protocol-tests.core-spec</span>
+      <span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">speclj.core</span><span class="p">]</span>
+            <span class="p">[</span><span class="nv">protocol-tests.core</span><span class="p">])</span>
+      <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">protocol_tests.core</span> <span class="nv">TextPrinter</span> <span class="nv">HtmlPrinter</span><span class="p">]))</span>
+
+    <span class="p">(</span><span class="nf">describe</span> <span class="s">&quot;core&quot;</span>
+      <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;returns the default functionality&quot;</span>
+        <span class="p">(</span><span class="nf">should=</span> <span class="s">&quot;sample text&quot;</span>
+                 <span class="p">(</span><span class="nb">with-out-str </span><span class="p">(</span><span class="nf">output</span> <span class="p">(</span><span class="nf">TextPrinter.</span><span class="p">)</span> <span class="s">&quot;sample text&quot;</span><span class="p">))))</span>
+
+      <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;returns the SAMPLE TEXT surrounded by a p tag&quot;</span>
+        <span class="p">(</span><span class="nf">should=</span> <span class="s">&quot;&lt;p&gt;SAMPLE TEXT&lt;/p&gt;&quot;</span>
+                 <span class="p">(</span><span class="nb">with-out-str </span><span class="p">(</span><span class="nf">output</span> <span class="p">(</span><span class="nf">HtmlPrinter.</span><span class="p">)</span> <span class="s">&quot;sample text&quot;</span><span class="p">)))))</span>
+</code></pre></div>
+
+<p><br />
+<em>Aside:</em></p>
+
+<p>Notice how I had to <code>import</code> the records in the spec. I had to use an
+underscore in <code>protocol_tests.core</code> which I believe is a bug in the 
+current version of Clojure (1.4).</p>
+
+
+  </article>
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21225209-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

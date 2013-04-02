@@ -53,34 +53,13 @@ li.post-title {
 .highlight pre {
   white-space: pre;
 }
-.highlight {
-  background:
-    -webkit-linear-gradient(90deg, #f2f2f2 20%, rgba(25,242,242,0)),
-    -webkit-linear-gradient(270deg, #f2f2f2 20%, rgba(242,242,242,0)) 100% 0,
-    -webkit-linear-gradient(90deg, #bbb 10%, rgba(242,242,242,0)),
-    -webkit-linear-gradient(270deg, #bbb 10%, rgba(242,242,242,0)) 100% 0;
 
-  background:
-    linear-gradient(90deg, #f2f2f2 20%, rgba(242,242,242,0)),
-    linear-gradient(270deg, #f2f2f2 20%, rgba(242,242,242,0)) 100% 0,
-    linear-gradient(90deg, #bbb 10%, rgba(242,242,242,0)),
-    linear-gradient(270deg, #bbb 10%, rgba(242,242,242,0)) 100% 0;
-
-  background-color: #f2f2f2;
-  background-repeat: no-repeat;
-  background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
-  background-attachment: local, local, scroll, scroll;
-}
 @media
   screen and (device-aspect-ratio: 40/71),
   screen and (device-aspect-ratio: 2/3) {
   body {
     width: auto;
     margin: 0 5px;
-  }
-  .highlight {
-    margin-left: -5px;
-    margin-right: -5px;
   }
   header h1 {
     font-size: 3em;

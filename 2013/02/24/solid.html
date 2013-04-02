@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<title>SOLID // Sandro Padin</title>
+<meta name="author" content="Sandro Padin">
+
+<meta http-equiv="cleartype" content="on">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="shortcut icon" href="/link/to/favicon.ico">
+<link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/components/normalize-css/normalize.css" media="all">
+<link rel="stylesheet" href="/stylesheets/github.css" media="all">
+<link rel="stylesheet" href="/stylesheets/master.css" media="all">
+<link rel="alternate" type="application/atom+xml" title="Subscribe to Sandro Padin's blog." href="/atom.xml"/>
+<script src="http://dabblet.com/code/prefixfree.min.js"></script>
+
+</head>
+<body>
+  <header>
+    <h1><a href="/">Sandro Padin</a></h1>
+  </header>
+  <article>
+    <header>
+      <time pubdate>February 24, 2013</time>
+      <h1>SOLID</h1>
+      <h2>Five rules for writing more maintainable and extendable code</h2>
+    </header>
+    <p><em>This post will be edited as I learn more about SOLID. For
+information from more authoritative sources check the
+<a href="#references">references</a> below.</em></p>
+
+<h3 id="single-responsibility-principle">Single Responsibility Principle</h3>
+
+<p>Every class should have a single responsibility. A responsibility is
+defined as a reason to change.</p>
+
+<p>Take the following example (adapted from this <a href="http://butunclebob.com/ArticleS.UncleBob.SrpInRuby">SRP in Ruby article</a>):</p>
+
+<pre><code># employee.rb
+class Employee
+  def set_hours(hours)
+  ...
+  end
+  def calculate_pay
+  ...
+  end
+end
+</code></pre>
+
+<p>The Employee class is calculating the pay and accepts the number of
+hours an employee works. Those are two separate responsibilities.</p>
+
+<p>This change would assure each file has only a single responsibility.</p>
+
+<pre><code># employee_time.rb
+class EmployeeTime
+  def set_hours(hours)
+  ...
+  end
+end
+
+# employee_pay.rb
+class EmployeePay
+  def calculate_pay
+  ...
+  end
+end
+
+# employee.rb
+require 'employee_time'
+require 'employee_pay'
+
+class Employee
+  include EmployeeTime
+  include EmployeePay
+end
+</code></pre>
+
+<h3 id="openclosed-principle">Open/closed Principle</h3>
+
+<p>You should be able to extend a class’ behavior without modifying the
+class.</p>
+
+<h3 id="liskov-substitution-principle">Liskov Substitution Principle</h3>
+
+<p>Derived classes should be substitutable for their base classes.</p>
+
+<h3 id="interface-segregation-principle">Interface Segregation Principle</h3>
+
+<p>Make fine grained classes that are client specific.</p>
+
+<h3 id="dependency-inversion-principle">Dependency Inversion Principle</h3>
+
+<p>Depend on abstractions, not concretions.</p>
+
+<h4 id="references">References:</h4>
+
+<ul>
+  <li><a href="http://www.butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod">The Principles of OOD</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">SOLID (object-oriented design)</a></li>
+</ul>
+
+
+  </article>
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21225209-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

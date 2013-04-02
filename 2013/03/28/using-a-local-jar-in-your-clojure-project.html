@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<title>Using a Local Jar in Your Clojure Project // Sandro Padin</title>
+<meta name="author" content="Sandro Padin">
+
+<meta http-equiv="cleartype" content="on">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="shortcut icon" href="/link/to/favicon.ico">
+<link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/components/normalize-css/normalize.css" media="all">
+<link rel="stylesheet" href="/stylesheets/github.css" media="all">
+<link rel="stylesheet" href="/stylesheets/master.css" media="all">
+<link rel="alternate" type="application/atom+xml" title="Subscribe to Sandro Padin's blog." href="/atom.xml"/>
+<script src="http://dabblet.com/code/prefixfree.min.js"></script>
+
+</head>
+<body>
+  <header>
+    <h1><a href="/">Sandro Padin</a></h1>
+  </header>
+  <article>
+    <header>
+      <time pubdate>March 28, 2013</time>
+      <h1>Using a Local Jar in Your Clojure Project</h1>
+      <h2></h2>
+    </header>
+    <p>I recently wrote a simple Java web server named <a href="https://github.com/spadin/Jerver">Jerver</a> as a task during
+my apprenticeship. After completing the server, my next task was to use
+that server in Clojure and integrate it with <a href="https://github.com/spadin/ticlj">Ticlj</a>, my Clojure-based Tic
+Tac Toe game. I was to package the Java server as a .jar that I would
+somehow use in <a href="https://github.com/spadin/ticlj-on-jerver">my new project</a>.</p>
+
+<p>I’d previously used libraries like <a href="https://github.com/slagyr/speclj">Speclj</a> and <a href="https://github.com/slagyr/joodo">Joodo</a> which have stable
+and documented APIs. My Java server was neither stable nor documented,
+so I needed a way to quickly and reliably update the server jar when I
+realized and implemented new APIs I needed to expose to my Clojure project.</p>
+
+<p>I noticed up front this needed to be some sort of shell script which
+runs the series of Maven commands for importing the jar from my server
+project.</p>
+
+<p>I came up with the <a href="https://gist.github.com/spadin/5265773">following shell script</a>:</p>
+
+<div class="highlight"><pre><code class="sh">    mkdir -p lib/local
+ 
+    <span class="c"># Set some defaults for JAR_VERSION, JAR_SOURCE and ARTIFACT_ID below.</span>
+    <span class="nv">JAR_VERSION</span><span class="o">=</span><span class="k">${</span><span class="nv">JAR_VERSION</span><span class="p">:=0.0.1-SNAPSHOT</span><span class="k">}</span>
+    <span class="nv">JAR_SOURCE</span><span class="o">=</span><span class="k">${</span><span class="nv">JAR_SOURCE</span><span class="p">:=/Users/sandropadin/IdeaProjects/Jerver/target/jerver.jar</span><span class="k">}</span>
+    <span class="nv">ARTIFACT_ID</span><span class="o">=</span><span class="k">${</span><span class="nv">ARTIFACT_ID</span><span class="p">:=jerver</span><span class="k">}</span>
+     
+    mvn deploy:deploy-file -DgroupId<span class="o">=</span><span class="nb">local</span> <span class="se">\</span>
+                           -DartifactId<span class="o">=</span><span class="nv">$ARTIFACT_ID</span> <span class="se">\</span>
+                           -Dversion<span class="o">=</span><span class="nv">$JAR_VERSION</span> <span class="se">\</span>
+                           -Dpackaging<span class="o">=</span>jar <span class="se">\</span>
+                           -Dfile<span class="o">=</span><span class="nv">$JAR_SOURCE</span> <span class="se">\</span>
+                           -Durl<span class="o">=</span>file:lib
+     
+     mvn -U dependency:resolve
+</code></pre></div>
+
+<p>I saved this file at <code>script/import-jar</code> made it executable (chmod +x)
+then I called it like so:</p>
+
+<div class="highlight"><pre><code class="text">     $ script/import-jar
+</code></pre></div>
+
+<p>I would then just run this command multiple times during my development
+process to quickly update the jar my Clojure project was using.</p>
+
+<p>The Clojure project.clj imports the jar:</p>
+
+<div class="highlight"><pre><code class="clojure">    <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.5.1&quot;</span><span class="p">]</span>
+                   <span class="p">[</span><span class="nv">local/jerver</span> <span class="s">&quot;0.0.1-SNAPSHOT&quot;</span><span class="p">]]</span> 
+</code></pre></div>
+
+<p>Then my code uses the classes within the jar:</p>
+
+<div class="highlight"><pre><code class="clojure">    <span class="p">(</span><span class="kd">ns </span><span class="nv">ticlj-on-jerver.api.resolver</span>
+      <span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">ticlj-on-jerver.api.response</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">set-status-code</span>
+                                                 <span class="nv">add-header</span><span class="p">]]))</span>
+
+    <span class="p">(</span><span class="kd">defrecord </span><span class="nv">Resolver</span> <span class="p">[</span><span class="nv">callback</span><span class="p">]</span>
+      <span class="c1">; This is an interface defined in the Java server</span>
+      <span class="nv">com.jerver.http.route.Routable</span>
+      <span class="p">(</span><span class="nb">resolve </span><span class="p">[</span><span class="nv">this</span> <span class="nv">request</span> <span class="nv">response</span><span class="p">]</span>
+        <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">callback</span> <span class="p">(</span><span class="ss">:callback</span> <span class="nv">this</span><span class="p">)]</span>
+          <span class="p">(</span><span class="nf">callback</span> <span class="nv">request</span> <span class="nv">response</span><span class="p">))))</span>
+
+    <span class="p">(</span><span class="kd">defn </span><span class="nv">resolver</span> <span class="p">[</span><span class="nv">callback</span><span class="p">]</span>
+      <span class="p">(</span><span class="nf">Resolver.</span> <span class="nv">callback</span><span class="p">))</span>
+</code></pre></div>
+
+<p>After all the setup, once I made a change to the Java server project, I
+would generate the package using Maven, then run my <code>import-jar</code> script
+to import the newly generated package and update the dependencies in my
+Clojure project.</p>
+
+
+  </article>
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21225209-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
