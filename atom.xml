@@ -4,9 +4,65 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-04-04T10:29:24-05:00</updated>
+ <updated>2013-04-04T16:56:38-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>with! and with-all! for Speclj</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/04/04/with-and-with-all-for-speclj.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>04 Apr 2013</updated>
+   <id>http://sa.ndropad.in/2013/04/04/with-and-with-all-for-speclj</id>
+   <content type="html">&lt;p&gt;I submitted a &lt;a href=&quot;https://github.com/slagyr/speclj/pull/40&quot;&gt;pull request&lt;/a&gt; to the &lt;a href=&quot;https://github.com/slagyr/speclj&quot;&gt;Speclj&lt;/a&gt; test framework that
+adds the &lt;code&gt;with!&lt;/code&gt; (with bang) and &lt;code&gt;with-all!&lt;/code&gt; spec components. These
+allow you to create a referencable symbol that are evaluated
+immediately, rather than lazily as their non-bang counterparts; &lt;a href=&quot;http://speclj.com/docs/with&quot;&gt;with&lt;/a&gt; and
+&lt;a href=&quot;http://speclj.com/docs/with-all&quot;&gt;with-all&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;An example of using &lt;code&gt;with!&lt;/code&gt; in Speclj.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;with!&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;atom&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;with!&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;with-example&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;swap!&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;has deref&amp;#39;ed with-example and incremented the counter&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;should=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;increments counter again after resetting with-example&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;should=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;can be accessed as usual&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;should=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with-example&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;run-specs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;An example of using &lt;code&gt;with-all!&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;with-all!&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;atom&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;with-all!&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;with-all-example&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;swap!&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+      
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;example set #1&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;has deref&amp;#39;ed with-all-example and incremented the counter&amp;quot;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;should=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;only resets with-all-example once per context&amp;quot;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;should=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;example set #2&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;still doesn&amp;#39;t reset or deref with-all-example&amp;quot;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;should=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;run-specs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Horizontal CSS Scroll Shadow</title>
