@@ -47,7 +47,7 @@ li.post-title {
 
 .highlight {
   font-size: 0.75em;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .highlight pre {

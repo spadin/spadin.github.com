@@ -4,9 +4,44 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-04-02T10:18:59-05:00</updated>
+ <updated>2013-04-04T10:29:24-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Horizontal CSS Scroll Shadow</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/04/03/horizontal-css-scroll-shadow.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>03 Apr 2013</updated>
+   <id>http://sa.ndropad.in/2013/04/03/horizontal-css-scroll-shadow</id>
+   <content type="html">&lt;p&gt;I recently simplified the design of this blog. It’s based on this blog
+by &lt;a href=&quot;http://stephaniebriones.com/&quot;&gt;Stephanie Briones&lt;/a&gt;, a design craftsman at 8th Light.&lt;/p&gt;
+
+&lt;p&gt;One simple change I implemented made code examples horizontally scrollable on
+mobile phones. I liked this a lot, but felt the wide code examples should
+invite the user to scroll sideways.&lt;/p&gt;
+
+&lt;p&gt;I’ve recently spotted an effect that hides overflowing content beneath a shadow 
+to give the visual cue that there is more information to be seen. I did some
+searching and found &lt;a href=&quot;http://lea.verou.me/2012/04/background-attachment-local/&quot;&gt;a great article&lt;/a&gt; by &lt;a href=&quot;https://twitter.com/leaverou&quot;&gt;Lea Verou&lt;/a&gt; on how to accomplish
+this effect with CSS.&lt;/p&gt;
+
+&lt;p&gt;I adapted the code from the article to work with horizontally scrollable
+content and this is what I came up with.&lt;/p&gt;
+
+&lt;pre class=&quot;codepen&quot; data-height=&quot;300&quot; data-type=&quot;result&quot; data-href=&quot;LxbDA&quot; data-user=&quot;spadin&quot; data-safe=&quot;true&quot;&gt;
+  &lt;code&gt;&lt;/code&gt;
+  &lt;a href=&quot;http://codepen.io/spadin/pen/LxbDA&quot;&gt;Check out this Pen!&lt;/a&gt;
+&lt;/pre&gt;
+&lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codepen.io/spadin/pen/zJuDh&quot;&gt;Play with the code on Code Pen&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Using a Local Jar in Your Clojure Project</title>
@@ -634,6 +669,368 @@ class.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I hope this helps anyone experiencing trouble installing Ruby 2.0.0&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Four-by-four Tic Tac Toe</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/21/four-by-four-tic-tac-toe.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>21 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/21/four-by-four-tic-tac-toe</id>
+   <content type="html">&lt;p&gt;I started refactoring my code in preparation of implementing the 4x4
+board and the eventual 3x3x3 board. I began by re-namespacing my files
+for clarity. In my main &lt;code&gt;ticlj&lt;/code&gt; directory, I now have &lt;code&gt;board&lt;/code&gt;, &lt;code&gt;player&lt;/code&gt;,
+&lt;code&gt;printer&lt;/code&gt; and &lt;code&gt;rules&lt;/code&gt; as directories and &lt;code&gt;core.clj&lt;/code&gt; as the only file in the
+root directory. I felt this cleaned up the root directory and made the
+subdirectory names more meaningful. I previously had &lt;code&gt;model&lt;/code&gt; and &lt;code&gt;io&lt;/code&gt; as the
+only subdirectories of the root which weren’t very clear. &lt;/p&gt;
+
+&lt;p&gt;I also began converting functions to use multi-methods as their data source 
+and the process has been pretty straightforward. &lt;/p&gt;
+
+&lt;p&gt;I worked my way through adding new tests that needed a 4x4 counterpart.
+Once done, I realized I hadn’t ran the game once to see how things were
+going and I was very proud. After making sure there weren’t any missing
+tests, I fired up the game and everything worked right off the bat. The
+4x4 board printed as expected and the AI’s played without problems (aside
+form performance issues). Everything worked as well, if not better than I 
+could have hoped for the first run.&lt;/p&gt;
+
+&lt;p&gt;Now I think the 3x3x3 Tic Tac Toe game should be very easy to implement
+as well. I’ll be doing that next week.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Sidenote: It’s my mom’s 71st Birthday today. :tada:&lt;/em&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Powerline</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/20/powerline.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>20 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/20/powerline</id>
+   <content type="html">&lt;p&gt;I ran across a cool Vim plugin today named, &lt;a href=&quot;https://github.com/Lokaltog/powerline&quot;&gt;Powerline&lt;/a&gt;. It nicely decorates
+your Vim status line and includes VCS status, file path, file type,
+etc. My previous status line was hard to read and understand so I hardly
+looked at it.&lt;/p&gt;
+
+&lt;p&gt;Here’s a look at my new Vim status line:
+&lt;a href=&quot;/images/powerline-vim.png&quot;&gt;&lt;img src=&quot;/images/powerline-vim.png&quot; alt=&quot;Vim Powerline status line&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Along the way, while figuring out how to configure Powerline for Vim, I
+ran across &lt;a href=&quot;https://github.com/erikw/tmux-powerline&quot;&gt;tmux-powerline&lt;/a&gt; which decorates tmux’s status line. The
+concept is directly taken from Powerline, but there are more widgets
+for showing different information, including: WAN and
+LAN IP, your current Git branch and status, weather, and a few
+more.&lt;/p&gt;
+
+&lt;p&gt;Here’s a look at my new tmux status line:
+&lt;a href=&quot;/images/tmux-powerline.png&quot;&gt;&lt;img src=&quot;/images/tmux-powerline.png&quot; alt=&quot;tmux-powerline status line&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Both plugins look nice, but besides the aesthetics, the information
+the provided is very useful and prensented clearly.&lt;/p&gt;
+
+&lt;p&gt;Although the setup for these plugins is a little difficult, I still
+recommend taking the half hour to an hour it takes and check them out.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>4x4 Tic Tac Toe</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/19/4x4-tic-tac-toe.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>19 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/19/4x4-tic-tac-toe</id>
+   <content type="html">&lt;p&gt;I spent the majority of the day determining how I should add the 4x4
+game to my implementation. As far as I can tell there are three major
+parts that change: the rules, printer and board. I will likely convert
+these to protocols and define types for them. I’m interested in seeing
+how I can refactor my code effectively and reduce bugs from simple copy
+and paste mistakes. &lt;/p&gt;
+
+&lt;p&gt;I’ll post updates this week with my findings. I’ll also be posting about
+&lt;a href=&quot;http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)&quot;&gt;SOLID&lt;/a&gt; this week in preparation of “teaching” Micah about the subject.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Alpha-Beta Pruning</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/18/alpha-beta-pruning.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>18 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/18/alpha-beta-pruning</id>
+   <content type="html">&lt;p&gt;After a week of struggling with the implementation, I finally got
+Minimax with alpha-beta pruning working.&lt;/p&gt;
+
+&lt;p&gt;I found it difficult to debug my code. I had some print statements
+peppered throughout the code but with the recursive nature of this
+algorithm, it was tough to really step through the code in order to
+determine where my bugs were. It took a combination of print statements
+and working through the code by hand for me to finally figure out what
+was going wrong, missing return variables.&lt;/p&gt;
+
+&lt;p&gt;While the process was tedious, I can appreciate having gone through it.
+Now I can confidently say I understand the Minimax algorithm and the
+alpha-beta pruning aspect of it as well. &lt;/p&gt;
+
+&lt;p&gt;Now on to my next task of creating a 4x4 board and a 3x3x3 game.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Nearing The End of The Tunnel</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/14/nearing-the-end-of-the-tunnel.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>14 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/14/nearing-the-end-of-the-tunnel</id>
+   <content type="html">&lt;p&gt;I really can’t thank Rick enough for once again spending a good half
+hour, if not more, helping me with this algorithm. I can finally see the
+light at the end of the tunnel. &lt;/p&gt;
+
+&lt;p&gt;My implementation of the alpha beta pruning search still has some bugs,
+but I feel confident I’ve modeled the function well enough to fix the
+bugs with relative ease. I’m hoping I can finish this up tomorrow
+morning. &lt;/p&gt;
+
+&lt;p&gt;The next step is implementing  an easy AI. This should only take me
+about half a day so hopefully I can make up some of the time I lost
+implementing Minimax.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>YASIM</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/13/yasim.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>13 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/13/yasim</id>
+   <content type="html">&lt;p&gt;I spent the day trying to implement the alpha-beta pruning search 
+algorithm. I’m not sure why it’s taking me so long to learn this algorithm. 
+Rick was kind enough to walk me through the algorithm as he understands 
+it this afternoon which was very helpful.&lt;/p&gt;
+
+&lt;p&gt;My major blockng point is visualizing the algorithm in the context of my
+Clojure Tic Tac Toe game. I’ve read several articles on this algorithm
+and on their own they make sense, but when I try to apply what I learn to 
+my game I get stuck. I feel I’m very close though and since this is the most 
+important part of my game the time I’m investing learning this algorithm 
+is well worth it.&lt;/p&gt;
+
+&lt;p&gt;This afternoon Corey Haines stopped by and hung out for a little bit.
+He was kind enough to give Rick and I his thoughts on Minimax and a
+different approach to thinking about the board and the moves. Rick
+mentioned that he was thinking of doing a kata on his Java server, and
+asked Corey his thoughts on how to approach the test for kata. Corey went 
+on the whiteboard and gave some interesting ideas for that as well. I
+haven’t gotten to the Java server yet, but it was still interesting to
+hear their thoughts on the topic.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Minimax and Geekfest</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/12/minimax-completed-and-geekfest.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>12 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/12/minimax-completed-and-geekfest</id>
+   <content type="html">&lt;p&gt;Today I finished debugging my minimax algorithm implementation in
+Clojure. I finally figured out the bug in my code. I’d previously been
+returning a hash which included the position being returned by the recursive 
+call, whereas I should have just been returning the position from the current 
+loop iteration. &lt;/p&gt;
+
+&lt;p&gt;Here’s the finished simple minimax algorithm:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;min-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/get-empty-indices&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+              &lt;span class=&quot;ss&quot;&gt;:let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/set-mark-at-index&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]]&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/gameover?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;; this is where my bug was&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;-1000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;calculate-score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+             &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;max-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;inc &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+             &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fn &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&amp;lt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;val &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;max-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/get-empty-indices&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+              &lt;span class=&quot;ss&quot;&gt;:let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/set-mark-at-index&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]]&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/gameover?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;; this is where my bug was&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;calculate-score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+             &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;min-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;inc &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+             &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fn &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;val &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+This algorithm isn’t quite complete. It’s slow and not as smart as it can be. I’ll be 
+refactoring the algorithm to use &lt;a href=&quot;http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning&quot;&gt;Alpha-beta pruning&lt;/a&gt; tomorrow.&lt;/p&gt;
+
+&lt;p&gt;I took a break during lunch to go to my first &lt;a href=&quot;http://www.meetup.com/Geekfest/&quot;&gt;Geekfest&lt;/a&gt;. The topic today
+was Clojure which was cool as I’ve been working with it so
+much lately. The talk focused on ways to define macros and arguments 
+for and against using macros. Overall it was an interesting talk although a bit 
+complicated at points. I don’t really see myself applying what I learned
+about macros anytime soon, but I enjoyed the talk.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Head Scratch Minimax</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/11/head-scratch-minimax.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>11 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/11/head-scratch-minimax</id>
+   <content type="html">&lt;p&gt;I spent all of today trying to implement the minimax algorithm in
+Clojure. I spent the morning looking at my old Ruby implementation and
+determining how to convert it to a functional style.&lt;/p&gt;
+
+&lt;p&gt;I came up with a plan for testing the &lt;code&gt;min-move&lt;/code&gt; and &lt;code&gt;max-move&lt;/code&gt; functions
+and began implementing. Figuring out which tests to write proved to be
+very difficult. &lt;/p&gt;
+
+&lt;p&gt;My unfamiliarity with Clojure caught up with me today. I was testing the
+functions and some aspects where working while others were not, it was
+very frustrating. &lt;/p&gt;
+
+&lt;p&gt;I finally decided to fire up the REPL and run some examples as a sanity
+check which is when I found the bug that had been biting me all day. &lt;/p&gt;
+
+&lt;p&gt;I was calculating the &lt;code&gt;max-move&lt;/code&gt; by first running a &lt;code&gt;for&lt;/code&gt; loop that collects
+all the moves with their score as a list, then tries to reduce that list to only
+hold the item with the highest score. I was doing the opposite for the
+&lt;code&gt;min-move&lt;/code&gt; function. Or so I thought…&lt;/p&gt;
+
+&lt;p&gt;Neither the &lt;code&gt;max-move&lt;/code&gt; nor the &lt;code&gt;min-move&lt;/code&gt; functions were working as I
+expected them. The way in which I was reducing the list of moves and
+scores was incorrect. &lt;/p&gt;
+
+&lt;p&gt;And that is where I left off this evening. Now that I understand what
+isn’t functioning I can go in with a clear head tomorrow morning and
+finish the minimax algorithm. &lt;/p&gt;
+
+&lt;p&gt;This is the non-functioning Minimax algorithm for posterity.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;min-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/get-empty-indices&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+             &lt;span class=&quot;ss&quot;&gt;:let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/set-mark-at-index&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]]&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/gameover?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+           &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;calculate-score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;max-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce min-key &lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reverse &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;max-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/get-empty-indices&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+             &lt;span class=&quot;ss&quot;&gt;:let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;board/set-mark-at-index&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]]&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/gameover?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;calculate-score&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;ss&quot;&gt;:position&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+           &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;min-move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rules/next-player&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new-board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reduce max-key &lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:score&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reverse &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Week One at 8th Light</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/02/08/week-one-at-8th-light.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>08 Feb 2013</updated>
+   <id>http://sa.ndropad.in/2013/02/08/week-one-at-8th-light</id>
+   <content type="html">&lt;p&gt;It’s been a great first week at 8th Light as a Resident Apprentice. I
+started the week by performing the &lt;a href=&quot;http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata&quot;&gt;bowling game kata&lt;/a&gt; in Java for &lt;a href=&quot;http://www.8thlight.com/our-team/micah-martin&quot;&gt;Micah&lt;/a&gt; with
+Rick, a fellow apprentice. I enjoyed practicing the kata last weekend,
+but it still took me 15 minutes to perform which was 5 minutes shy of
+my 10 minute goal. I realized if I want to get my time down I don’t just need to
+type faster, but really get familiar with IntelliJ IDEA to take advantage of all
+the keyboard shortcuts it offers. I hadn’t programmed in Java in quite a few
+years, and I was happily surprised to find a new feature (to me)
+called annotations. From Wikipedia, “An annotation, in the Java
+computer programming language, is a form of syntactic metadata that
+can be added to Java source code.” In short, annotations let you add
+information about the source code. I noticed annoations while using JUnit,
+the tests are marked with an &lt;code&gt;@Test&lt;/code&gt; annotation.&lt;/p&gt;
+
+&lt;p&gt;I’ve spent the majority of this week learning Clojure and making a 
+command-line Tic Tac Toe game. The process has been rewarding and 
+frustrating at the same time. I call the project &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;Ticlj&lt;/a&gt;, although 
+I’m planning to change the name to &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;TicljTacToe&lt;/a&gt; soon. I wrote the 
+basic human vs human game in a few days, but after talking to Micah, I 
+learned the way I coded my program had imperative programming qualities rather 
+than being purely functional; I kept a reference to the Tic Tac Toe board and 
+I was changing the reference to point at other iterations of the board via &lt;code&gt;ref&lt;/code&gt; 
+and &lt;code&gt;ref-set&lt;/code&gt; calls.&lt;/p&gt;
+
+&lt;p&gt;I took some time today to refactor my game into being purely
+functional. In order to do so, I had to change about 15 or so
+functions to accept a new &lt;code&gt;board&lt;/code&gt; argument. By doing so, the reference
+to the board was no longer necessary, so now my Tic Tac Toe game has no
+mutable state.&lt;/p&gt;
+
+&lt;p&gt;I’m very happy with what I’ve been able to accomplish this week.
+Clojure has actually been a nice language to work with, aside from the
+initial shock over the incredible number of parenthesis, the language
+is simple and succint.&lt;/p&gt;
+
+&lt;p&gt;Thanks to Micah, Rick, Ryan and Rylan for helping me wrap my head
+around functional programming principles. After a long time of not thinking
+about it, the principles of functional programming were a little
+confusing, but I think I have a good grasp on it.&lt;/p&gt;
+
+&lt;p&gt;On a separate note, I noticed some interesting books on design
+patterns and TDD in the 8th Light library and I plan to take a closer 
+look next week.&lt;/p&gt;
+
+&lt;h3 id=&quot;things-to-accomplish-next-week&quot;&gt;Things to accomplish next week:&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Complete the AI for my &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;Tic Tac Toe game.&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Finish the full &lt;a href=&quot;https://github.com/spadin/ticlj&quot;&gt;Tic Tac Toe game.&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Read a book from the 8th Light library.&lt;/li&gt;
+&lt;/ol&gt;
+
 </content>
  </entry>
  

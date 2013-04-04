@@ -16,6 +16,11 @@ task :preview do
     system "jekyll --auto --server --pygments"
 end
 
+desc "Launch preview environment with drafts"
+task :preview_with_drafts do
+    system "jekyll --auto --server --pygments --future"
+end
+
 desc "Update master branch"
 task :update do
   dir = File.dirname(__FILE__)
