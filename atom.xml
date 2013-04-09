@@ -4,9 +4,59 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-04-04T16:56:38-05:00</updated>
+ <updated>2013-04-09T12:15:36-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Resetting root MySQL password</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/04/09/resetting-root-mysql-password.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>09 Apr 2013</updated>
+   <id>http://sa.ndropad.in/2013/04/09/resetting-root-mysql-password</id>
+   <content type="html">&lt;p&gt;I needed to setup a local development environment that uses MySQL. I had
+setup MySQL ages ago and forgot the root password. After some
+searching I found a &lt;a href=&quot;http://www.cyberciti.biz/tips/recover-mysql-root-password.html&quot;&gt;helpful walkthrough&lt;/a&gt;. It’s just what I needed; I
+just changed some of the commands to match my set up.&lt;/p&gt;
+
+&lt;p&gt;I’ve added the commands I used below for posterity.&lt;/p&gt;
+
+&lt;p&gt;Basic steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Kill server&lt;/li&gt;
+  &lt;li&gt;Start server without privilege system&lt;/li&gt;
+  &lt;li&gt;Connect to MySQL and reset password&lt;/li&gt;
+  &lt;li&gt;Kill the server without privilges&lt;/li&gt;
+  &lt;li&gt;Restart server normally&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The following steps shutdown the server, restart it without the
+privilege system and connects to MySQL as root.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;    $ killall mysqld
+    $ mysqld_safe --skip-grant-tables &amp;amp;
+    $ mysql -u root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you’re inside the MySQL command line client.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;    mysql&amp;gt; USE mysql;
+    mysql&amp;gt; UPDATE user SET Password=PASSWORD(&amp;#39;new-password&amp;#39;) WHERE User=&amp;#39;root&amp;#39;;
+    mysql&amp;gt; FLUSH PRIVILEGES;
+    mysql&amp;gt; \c
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You’re password is now reset. Restart your server and continue working.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;    $ mysqld_safe &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>with! and with-all! for Speclj</title>
