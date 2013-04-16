@@ -4,7 +4,7 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-04-16T14:44:54-05:00</updated>
+ <updated>2013-04-16T14:53:39-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
  
@@ -37,6 +37,10 @@ a simple alias:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;    $ kat [filename]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here’s how it looks:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kat.jpg&quot; alt=&quot;&amp;quot;Colorized output&amp;quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you’d like to give this a try, just add the alias above to your
 &lt;code&gt;~/.bashrc&lt;/code&gt;, &lt;code&gt;~/.zshrc&lt;/code&gt; or appropriate file. You’ll need to install
