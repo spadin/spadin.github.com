@@ -4,9 +4,50 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-04-09T12:15:36-05:00</updated>
+ <updated>2013-04-16T14:44:54-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Colorize you cats</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/04/16/colorize-you-cat.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>16 Apr 2013</updated>
+   <id>http://sa.ndropad.in/2013/04/16/colorize-you-cat</id>
+   <content type="html">&lt;p&gt;Working constantly in the command-line, I’ve found printing code using
+&lt;code&gt;cat&lt;/code&gt; slows me down because I’m used to the colorized output of &lt;code&gt;vim&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I recently install &lt;a href=&quot;http://pygments.org/&quot;&gt;Pygments&lt;/a&gt; and thought this would be a nice use
+for the tool. A Google search later, I found a command to colorize a
+file on the command-line.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;    $ pygmentize -f terminal -g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I wasn’t ready to commit to learning such a long command so I created
+a simple alias:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;    &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;pygmentize -f terminal -g&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now when I need to take a peek at a file, I simply use:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;    $ kat [filename]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you’d like to give this a try, just add the alias above to your
+&lt;code&gt;~/.bashrc&lt;/code&gt;, &lt;code&gt;~/.zshrc&lt;/code&gt; or appropriate file. You’ll need to install
+Pygments. On my Mac, I installed Pygments by using the easy_install
+tool:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;    $ easy_install Pygments
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Resetting root MySQL password</title>
@@ -139,7 +180,7 @@ this effect with CSS.&lt;/p&gt;
 content and this is what I came up with.&lt;/p&gt;
 
 &lt;pre class=&quot;codepen&quot; data-height=&quot;300&quot; data-type=&quot;result&quot; data-href=&quot;LxbDA&quot; data-user=&quot;spadin&quot; data-safe=&quot;true&quot;&gt;
-  &lt;code&gt;&lt;/code&gt;
+  &lt;code /&gt;
   &lt;a href=&quot;http://codepen.io/spadin/pen/LxbDA&quot;&gt;Check out this Pen!&lt;/a&gt;
 &lt;/pre&gt;
 &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
@@ -722,8 +763,8 @@ class EmployeePay
 end
 
 # employee.rb
-require &#39;employee_time&#39;
-require &#39;employee_pay&#39;
+require 'employee_time'
+require 'employee_pay'
 
 class Employee
   include EmployeeTime

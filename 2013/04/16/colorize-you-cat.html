@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-<title>Horizontal CSS Scroll Shadow // Sandro Padin</title>
+<title>Colorize you cats // Sandro Padin</title>
 <meta name="author" content="Sandro Padin">
 
 <meta http-equiv="cleartype" content="on">
@@ -25,32 +25,38 @@
   </header>
   <article>
     <header>
-      <time pubdate>April  3, 2013</time>
-      <h1>Horizontal CSS Scroll Shadow</h1>
+      <time pubdate>April 16, 2013</time>
+      <h1>Colorize you cats</h1>
       <h2></h2>
     </header>
-    <p>I recently simplified the design of this blog. It’s based on this blog
-by <a href="http://stephaniebriones.com/">Stephanie Briones</a>, a design craftsman at 8th Light.</p>
+    <p>Working constantly in the command-line, I’ve found printing code using
+<code>cat</code> slows me down because I’m used to the colorized output of <code>vim</code>.</p>
 
-<p>One simple change I implemented made code examples horizontally scrollable on
-mobile phones. I liked this a lot, but felt the wide code examples should
-invite the user to scroll sideways.</p>
+<p>I recently install <a href="http://pygments.org/">Pygments</a> and thought this would be a nice use
+for the tool. A Google search later, I found a command to colorize a
+file on the command-line.</p>
 
-<p>I’ve recently spotted an effect that hides overflowing content beneath a shadow 
-to give the visual cue that there is more information to be seen. I did some
-searching and found <a href="http://lea.verou.me/2012/04/background-attachment-local/">a great article</a> by <a href="https://twitter.com/leaverou">Lea Verou</a> on how to accomplish
-this effect with CSS.</p>
+<div class="highlight"><pre><code class="text">    $ pygmentize -f terminal -g
+</code></pre></div>
 
-<p>I adapted the code from the article to work with horizontally scrollable
-content and this is what I came up with.</p>
+<p>I wasn’t ready to commit to learning such a long command so I created
+a simple alias:</p>
 
-<pre class="codepen" data-height="300" data-type="result" data-href="LxbDA" data-user="spadin" data-safe="true">
-  <code />
-  <a href="http://codepen.io/spadin/pen/LxbDA">Check out this Pen!</a>
-</pre>
-<script async="" src="http://codepen.io/assets/embed/ei.js"></script>
+<div class="highlight"><pre><code class="sh">    <span class="nb">alias </span><span class="nv">kat</span><span class="o">=</span><span class="s1">&#39;pygmentize -f terminal -g&#39;</span>
+</code></pre></div>
 
-<p><a href="http://codepen.io/spadin/pen/zJuDh">Play with the code on Code Pen</a></p>
+<p>Now when I need to take a peek at a file, I simply use:</p>
+
+<div class="highlight"><pre><code class="text">    $ kat [filename]
+</code></pre></div>
+
+<p>If you’d like to give this a try, just add the alias above to your
+<code>~/.bashrc</code>, <code>~/.zshrc</code> or appropriate file. You’ll need to install
+Pygments. On my Mac, I installed Pygments by using the easy_install
+tool:</p>
+
+<div class="highlight"><pre><code class="text">    $ easy_install Pygments
+</code></pre></div>
 
 
   </article>
