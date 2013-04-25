@@ -4,9 +4,27 @@
  <title>Sandro Padin</title>
  <link href="http://sa.ndropad.in/atom.xml" rel="self"/>
  <link href="http://sa.ndropad.in/"/>
- <updated>2013-04-16T14:53:39-05:00</updated>
+ <updated>2013-04-25T14:42:21-05:00</updated>
  <id>http://sa.ndropad.in/</id>
 
+ 
+ <entry>
+   <title>Fizzbuzz Kata</title>
+   <category term="" />
+   <link href="http://sa.ndropad.in/2013/04/25/fizzbuzz-kata.html"/>
+   <author>
+     <name>[]</name>
+   </author>
+   <updated>25 Apr 2013</updated>
+   <id>http://sa.ndropad.in/2013/04/25/fizzbuzz-kata</id>
+   <content type="html">&lt;p&gt;I will be performing the &lt;a href=&quot;http://codingdojo.org/cgi-bin/wiki.pl?KataFizzBuzz&quot;&gt;Fizzbuzz Kata&lt;/a&gt; in Clojure tomorrow at &lt;a href=&quot;http://university.8thlight.com/&quot;&gt;8th Light University&lt;/a&gt;. While practicing, I found it useful to record myself and watch the playback for parts I could improve.&lt;/p&gt;
+
+&lt;p&gt;Below is my performance of the Fizzbuzz Kata.&lt;/p&gt;
+
+&lt;iframe src=&quot;http://player.vimeo.com/video/64828614&quot; width=&quot;792&quot; height=&quot;628&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Colorize you cats</title>
