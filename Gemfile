@@ -1,6 +1,3 @@
-source :rubygems
+source "https://rubygems.org"
 
-gem 'kramdown'
-gem 'coderay'
-gem 'rspec'
-gem 'rake'
+gem "jekyll", "~> 3.3"
